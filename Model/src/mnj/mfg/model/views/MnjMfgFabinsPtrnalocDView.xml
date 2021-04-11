@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjMfgFabinsPtrnalocDView"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  SelectList="MnjMfgFabinsPtrnalocD.ALOC_DETAIL_ID, 
+       MnjMfgFabinsPtrnalocD.ALOC_LINE_ID, 
+       MnjMfgFabinsPtrnalocD.SUPPLIER_SR_NO, 
+       MnjMfgFabinsPtrnalocD.ROLL_NO, 
+       MnjMfgFabinsPtrnalocD.SHRINK_LENGTH, 
+       MnjMfgFabinsPtrnalocD.SHRINK_WIDTH, 
+       MnjMfgFabinsPtrnalocD.ROLL_LENGTH, 
+       MnjMfgFabinsPtrnalocD.REMARKS, 
+       MnjMfgFabinsPtrnalocD.SUPPLIER_ROLL_NO"
+  FromList="MNJ_MFG_FABINS_PTRNALOC_D MnjMfgFabinsPtrnalocD"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+  </DesignTime>
+  <EntityUsage
+    Name="MnjMfgFabinsPtrnalocD"
+    Entity="mnj.mfg.model.entities.MnjMfgFabinsPtrnalocD"/>
+  <ViewAttribute
+    Name="AlocDetailId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="AlocDetailId"
+    EntityUsage="MnjMfgFabinsPtrnalocD"
+    AliasName="ALOC_DETAIL_ID"/>
+  <ViewAttribute
+    Name="AlocLineId"
+    PrecisionRule="true"
+    EntityAttrName="AlocLineId"
+    EntityUsage="MnjMfgFabinsPtrnalocD"
+    AliasName="ALOC_LINE_ID"/>
+  <ViewAttribute
+    Name="SupplierSrNo"
+    PrecisionRule="true"
+    EntityAttrName="SupplierSrNo"
+    EntityUsage="MnjMfgFabinsPtrnalocD"
+    AliasName="SUPPLIER_SR_NO"/>
+  <ViewAttribute
+    Name="RollNo"
+    PrecisionRule="true"
+    EntityAttrName="RollNo"
+    EntityUsage="MnjMfgFabinsPtrnalocD"
+    AliasName="ROLL_NO"/>
+  <ViewAttribute
+    Name="ShrinkLength"
+    PrecisionRule="true"
+    EntityAttrName="ShrinkLength"
+    EntityUsage="MnjMfgFabinsPtrnalocD"
+    AliasName="SHRINK_LENGTH"/>
+  <ViewAttribute
+    Name="ShrinkWidth"
+    PrecisionRule="true"
+    EntityAttrName="ShrinkWidth"
+    EntityUsage="MnjMfgFabinsPtrnalocD"
+    AliasName="SHRINK_WIDTH"/>
+  <ViewAttribute
+    Name="RollLength"
+    PrecisionRule="true"
+    EntityAttrName="RollLength"
+    EntityUsage="MnjMfgFabinsPtrnalocD"
+    AliasName="ROLL_LENGTH"/>
+  <ViewAttribute
+    Name="Remarks"
+    PrecisionRule="true"
+    EntityAttrName="Remarks"
+    EntityUsage="MnjMfgFabinsPtrnalocD"
+    AliasName="REMARKS"/>
+  <ViewAttribute
+    Name="SupplierRollNo"
+    PrecisionRule="true"
+    EntityAttrName="SupplierRollNo"
+    EntityUsage="MnjMfgFabinsPtrnalocD"
+    AliasName="SUPPLIER_ROLL_NO"/>
+</ViewObject>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.62.29" id="DataBindings" SeparateXMLFiles="false"
+             Package="mnj.mfg.view" ClientType="Generic">
+  <pageMap>
+    <page path="/Query.jspx" usageId="mnj_mfg_view_QueryPageDef"/>
+    <page path="/Edit.jspx" usageId="mnj_mfg_view_EditPageDef"/>
+    <page path="/Inventory.jspx" usageId="mnj_mfg_view_InventoryPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="mnj_mfg_view_QueryPageDef"
+          path="mnj.mfg.view.pageDefs.QueryPageDef"/>
+    <page id="mnj_mfg_view_EditPageDef"
+          path="mnj.mfg.view.pageDefs.EditPageDef"/>
+    <page id="mnj_mfg_view_InventoryPageDef"
+          path="mnj.mfg.view.pageDefs.InventoryPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="AppModuleDataControl" Package="mnj.mfg.model.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="AppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

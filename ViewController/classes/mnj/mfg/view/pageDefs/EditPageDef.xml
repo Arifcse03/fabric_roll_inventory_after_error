@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.62.29" id="EditPageDef"
+                Package="mnj.mfg.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="HeaderVO1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="HeaderVO1Iterator"/>
+    <iterator Binds="FabricShrinkLines1" RangeSize="1000"
+              DataControl="AppModuleDataControl"
+              id="FabricShrinkLines1Iterator"/>
+    <searchRegion Binds="FabricShrinkLines1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="FabricShrinkLines1Query"/>
+    <iterator Binds="FabricShadeLine1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="FabricShadeLine1Iterator"/>
+    <searchRegion Binds="FabricShadeLine1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="FabricShadeLine1Query"/>
+    <iterator Binds="MnjMfgFabinsSecndDView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgFabinsSecndDView1Iterator"/>
+    <searchRegion Binds="MnjMfgFabinsSecndDView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjMfgFabinsSecndDView1Query"/>
+    <iterator Binds="MnjMfgFabinsSecndD2View1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgFabinsSecndD2View1Iterator"/>
+    <searchRegion Binds="MnjMfgFabinsSecndD2View1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjMfgFabinsSecndD2View1Query"/>
+    <iterator Binds="FebricOunceLineView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="FebricOunceLineView1Iterator"/>
+    <searchRegion Binds="FebricOunceLineView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="FebricOunceLineView1Query"/>
+    <iterator Binds="FebricOunceDetailView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="FebricOunceDetailView1Iterator"/>
+    <searchRegion Binds="FebricOunceDetailView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="FebricOunceDetailView1Query"/>
+    <iterator Binds="ProdPageLinesVO1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="ProdPageLinesVO1Iterator"/>
+    <iterator Binds="ProdPageShedDetVO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="ProdPageShedDetVO1Iterator"/>
+    <searchRegion Binds="ProdPageShedDetVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ProdPageShedDetVO1Query"/>
+    <iterator Binds="InvColorWiseRols1" RangeSize="1500"
+              DataControl="AppModuleDataControl"
+              id="InvColorWiseRols1Iterator"/>
+    <searchRegion Binds="InvColorWiseRols1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="InvColorWiseRols1Query"/>
+    <iterator Binds="ProdFbShrnkRollVO1" RangeSize="1500"
+              DataControl="AppModuleDataControl"
+              id="ProdFbShrnkRollVO1Iterator"/>
+    <searchRegion Binds="ProdFbShrnkRollVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ProdFbShrnkRollVO1Query"/>
+    <iterator Binds="DefectCodeVO1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="DefectCodeVO1Iterator"/>
+    <searchRegion Binds="DefectCodeVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="DefectCodeVO1Query"/>
+    <iterator Binds="ProdPageFirstDetVO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="ProdPageFirstDetVO1Iterator"/>
+    <searchRegion Binds="ProdPageFirstDetVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ProdPageFirstDetVO1Query"/>
+    <iterator Binds="MnjMfgFabinsPtrnalocLView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgFabinsPtrnalocLView1Iterator"/>
+    <searchRegion Binds="MnjMfgFabinsPtrnalocLView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjMfgFabinsPtrnalocLView1Query"/>
+    <iterator Binds="MnjMfgFabinsPtrnalocDView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgFabinsPtrnalocDView1Iterator"/>
+    <searchRegion Binds="MnjMfgFabinsPtrnalocDView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjMfgFabinsPtrnalocDView1Query"/>
+    <iterator Binds="ProdPatternAlocRolsVO1" RangeSize="1500"
+              DataControl="AppModuleDataControl"
+              id="ProdPatternAlocRolsVO1Iterator"/>
+    <searchRegion Binds="ProdPatternAlocRolsVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ProdPatternAlocRolsVO1Query"/>
+    <iterator Binds="ProdShadeRollsVO1" RangeSize="1500"
+              DataControl="AppModuleDataControl"
+              id="ProdShadeRollsVO1Iterator"/>
+    <searchRegion Binds="ProdShadeRollsVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ProdShadeRollsVO1Query"/>
+    <iterator Binds="FabOuncePopUpVO1" RangeSize="1000"
+              DataControl="AppModuleDataControl" id="FabOuncePopUpVO1Iterator"/>
+    <searchRegion Binds="FabOuncePopUpVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="FabOuncePopUpVO1Query"/>
+    <iterator Binds="NewBalancePopUp1" RangeSize="1000"
+              DataControl="AppModuleDataControl" id="NewBalancePopUp1Iterator"/>
+    <searchRegion Binds="NewBalancePopUp1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="NewBalancePopUp1Query"/>
+    <iterator Binds="TransferRollHeaderVO1" RangeSize="1000"
+              DataControl="AppModuleDataControl"
+              id="TransferRollHeaderVO1Iterator"/>
+    <searchRegion Binds="TransferRollHeaderVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="TransferRollHeaderVO1Query"/>
+    <iterator Binds="RollTransferHistoryVO1" RangeSize="2000"
+              DataControl="AppModuleDataControl"
+              id="RollTransferHistoryVO1Iterator"/>
+    <searchRegion Binds="RollTransferHistoryVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="RollTransferHistoryVO1Query"/>
+    <iterator Binds="MnjSkewMovementVO1" RangeSize="2000"
+              DataControl="AppModuleDataControl"
+              id="MnjSkewMovementVO1Iterator"/>
+    <searchRegion Binds="MnjSkewMovementVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjSkewMovementVO1Query"/>
+    <iterator Binds="RollForSkewMovementVO1" RangeSize="2000"
+              DataControl="AppModuleDataControl"
+              id="RollForSkewMovementVO1Iterator"/>
+    <searchRegion Binds="RollForSkewMovementVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="RollForSkewMovementVO1Query"/>
+    <iterator Binds="MnjSkewMovementDVO1" RangeSize="2000"
+              DataControl="AppModuleDataControl"
+              id="MnjSkewMovementDVO1Iterator"/>
+    <searchRegion Binds="MnjSkewMovementDVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjSkewMovementDVO1Query"/>
+    <searchRegion Binds="ProdPageLinesVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ProdPageLinesVO1Query"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="HeaderNo">
+      <AttrNames>
+        <Item Value="HeaderNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="InvoiceNo">
+      <AttrNames>
+        <Item Value="InvoiceNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="UpdateOn">
+      <AttrNames>
+        <Item Value="UpdateOn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="BwWidthCm">
+      <AttrNames>
+        <Item Value="BwWidthCm"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="BwLengthCm">
+      <AttrNames>
+        <Item Value="BwLengthCm"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="FabricShrinkLines1Iterator" id="FabricShrinkLines1">
+      <nodeDefinition DefName="mnj.mfg.model.views.FabricShrinkLines"
+                      Name="FabricShrinkLines10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="RollLength"/>
+          <Item Value="RollWidth"/>
+          <Item Value="AwLength"/>
+          <Item Value="ShrinkLength"/>
+          <Item Value="ShrinkPrcLength"/>
+          <Item Value="AwWidth"/>
+          <Item Value="ShrinkWidth"/>
+          <Item Value="ShrinkPrcWidth"/>
+          <Item Value="Remarks"/>
+          <Item Value="AlocYard"/>
+          <Item Value="CutWidth"/>
+          <Item Value="RollLength2"/>
+          <Item Value="AlocInch"/>
+          <Item Value="BlncInch"/>
+          <Item Value="BlncYards"/>
+          <Item Value="SuppRollNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <tree IterBinding="FabricShadeLine1Iterator" id="FabricShadeLine1">
+      <nodeDefinition DefName="mnj.mfg.model.views.FabricShadeLine"
+                      Name="FabricShadeLine10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="Shade"/>
+          <Item Value="Remarks"/>
+          <Item Value="LineId"/>
+          <Item Value="TotalRolls"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="FabricShadeLine1Iterator" id="Delete1"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="BuyerId">
+      <AttrNames>
+        <Item Value="BuyerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="OrgId">
+      <AttrNames>
+        <Item Value="OrgId"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="HeaderVO1Iterator"
+                  Uses="LOV_ReceiveNo" id="ReceiveNo"/>
+    <methodAction id="populateShrink"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="populateShrink"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="selectAllLines"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="selectAllLines"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="flag" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="TotalRolRcv">
+      <AttrNames>
+        <Item Value="TotalRolRcv"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="TotalRcvQty">
+      <AttrNames>
+        <Item Value="TotalRcvQty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="NoOfRolChkd">
+      <AttrNames>
+        <Item Value="NoOfRolChkd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="NoChkdQty">
+      <AttrNames>
+        <Item Value="NoChkdQty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="AvgCutWidth">
+      <AttrNames>
+        <Item Value="AvgCutWidth"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="TotPnltyPnts">
+      <AttrNames>
+        <Item Value="TotPnltyPnts"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="TotPoints">
+      <AttrNames>
+        <Item Value="TotPoints"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="PasFail">
+      <AttrNames>
+        <Item Value="PasFail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="ActionReqFail">
+      <AttrNames>
+        <Item Value="ActionReqFail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="Remarks">
+      <AttrNames>
+        <Item Value="Remarks"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="MnjMfgFabinsSecndDView1Iterator"
+          id="MnjMfgFabinsSecndDView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgFabinsSecndDView"
+                      Name="MnjMfgFabinsSecndDView10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="ActualLength"/>
+          <Item Value="CutWidth"/>
+          <Item Value="TotPenPoints"/>
+          <Item Value="TotPoints"/>
+          <Item Value="ShadeVar"/>
+          <Item Value="Bowing"/>
+          <Item Value="Skewing"/>
+          <Item Value="RolAcptRej"/>
+          <Item Value="Remarks"/>
+          <Item Value="ActualLengthInch"/>
+          <Item Value="SupplierRollNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="MnjMfgFabinsSecndD2View1Iterator"
+          id="MnjMfgFabinsSecndD2View1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgFabinsSecndD2View"
+                      Name="MnjMfgFabinsSecndD2View10">
+        <AttrNames>
+          <Item Value="DefectCode"/>
+          <Item Value="Point1"/>
+          <Item Value="Point2"/>
+          <Item Value="Point3"/>
+          <Item Value="Point4"/>
+          <Item Value="TotalPoint"/>
+          <Item Value="DefectName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MnjMfgFabinsSecndDView1Iterator" id="Delete2"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="MnjMfgFabinsSecndD2View1Iterator" id="CreateInsert3"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MnjMfgFabinsSecndD2View1Iterator" id="Delete3"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <methodAction id="getPassFailVal"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getPassFailVal"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.getPassFailVal_AppModuleDataControl_dataProvider_getPassFailVal_result">
+      <NamedData NDName="buyer" NDValue="" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="FebricOunceLineView1Iterator" id="FebricOunceLineView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.FebricOunceLineView"
+                      Name="FebricOunceLineView10">
+        <AttrNames>
+          <Item Value="NoumberRollChecked"/>
+          <Item Value="RequireFabricOunce"/>
+          <Item Value="BwOunce"/>
+          <Item Value="AwOunce"/>
+          <Item Value="Remarks"/>
+          <Item Value="Variation"/>
+          <Item Value="VariationPrcnt"/>
+          <Item Value="Inspection"/>
+          <Item Value="InsDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="FebricOunceLineView1Iterator" id="Delete4"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="FebricOunceDetailView1Iterator"
+          id="FebricOunceDetailView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.FebricOunceDetailView"
+                      Name="FebricOunceDetailView10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="RequireFabricOunce"/>
+          <Item Value="BwOunceDetail"/>
+          <Item Value="AwOunceDetail"/>
+          <Item Value="Variation"/>
+          <Item Value="VariationPrcnt"/>
+          <Item Value="Inspection"/>
+          <Item Value="InsDate"/>
+          <Item Value="SupplierRollNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="FebricOunceDetailView1Iterator" id="Delete5"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="ProdPageLinesVO1Iterator" id="CreateInsert6"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="ProdPageLinesVO1Iterator" id="Delete6"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="ProdPageShedDetVO1Iterator" id="ProdPageShedDetVO1">
+      <nodeDefinition DefName="mnj.mfg.model.views.ProdPageShedDetVO"
+                      Name="ProdPageShedDetVO10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="LineId"/>
+          <Item Value="SupplierRollNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="ProdPageShedDetVO1Iterator" id="Delete7"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="VendorName">
+      <AttrNames>
+        <Item Value="VendorName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="GrnDates">
+      <AttrNames>
+        <Item Value="GrnDates"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="FabricShrinkLines1Iterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <methodAction id="getTotalRollsYards"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getTotalRollsYards"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.getTotalRollsYards_AppModuleDataControl_dataProvider_getTotalRollsYards_result">
+      <NamedData NDName="type" NDType="java.lang.String"/>
+      <NamedData NDName="headerid" NDType="java.lang.String"/>
+      <NamedData NDName="color" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="InvColorWiseRols1Iterator" id="InvColorWiseRols1">
+      <nodeDefinition DefName="mnj.mfg.model.lovviews.InvColorWiseRols"
+                      Name="InvColorWiseRols10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="RollLength"/>
+          <Item Value="RollWidth"/>
+          <Item Value="Flag" Binds="Flag"/>
+          <Item Value="RollLength2"/>
+          <Item Value="RollNoNew"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="InvColorWiseRols1Iterator" id="Flag"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Flag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="setColorWiseWherClause"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setColorWiseWherClause"
+                  IsViewObjectMethod="false"/>
+    <tree IterBinding="InvColorWiseRols1Iterator" id="InvColorWiseRols11">
+      <nodeDefinition DefName="mnj.mfg.model.lovviews.InvColorWiseRols"
+                      Name="InvColorWiseRols110">
+        <AttrNames>
+          <Item Value="Flag" Binds="Flag"/>
+          <Item Value="RollNo"/>
+          <Item Value="RollLength"/>
+          <Item Value="RollWidth"/>
+          <Item Value="RollNoNew"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="populateShade"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="populateShade"
+                  IsViewObjectMethod="false"/>
+    <action IterBinding="FabricShadeLine1Iterator" id="CreateInsert1"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="ProdFbShrnkRollVO1Iterator" id="ProdFbShrnkRollVO1">
+      <nodeDefinition DefName="mnj.mfg.model.lovviews.ProdFbShrnkRollVO"
+                      Name="ProdFbShrnkRollVO10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="CutWidth"/>
+          <Item Value="SelpRol" Binds="SelpRol"/>
+          <Item Value="SuppRollNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="popuFabInsRoll"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="popuFabInsRoll"
+                  IsViewObjectMethod="false"/>
+    <tree IterBinding="DefectCodeVO1Iterator" id="DefectCodeVO1">
+      <nodeDefinition DefName="mnj.mfg.model.lovviews.DefectCodeVO"
+                      Name="DefectCodeVO10">
+        <AttrNames>
+          <Item Value="FlexValue"/>
+          <Item Value="Description"/>
+          <Item Value="SelDef" Binds="SelDef"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="DefectCodeVO1Iterator" id="SelDef"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SelDef"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="popDefectCode"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="popDefectCode"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="popuOunceRoll"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="popuOunceRoll"
+                  IsViewObjectMethod="false"/>
+    <tree IterBinding="ProdPageFirstDetVO1Iterator" id="ProdPageFirstDetVO1">
+      <nodeDefinition DefName="mnj.mfg.model.views.ProdPageFirstDetVO"
+                      Name="ProdPageFirstDetVO10">
+        <AttrNames>
+          <Item Value="TotalRolRcv"/>
+          <Item Value="TotalRcvQty"/>
+          <Item Value="NoOfRolChkd"/>
+          <Item Value="NoChkdQty"/>
+          <Item Value="AvgCutWidth"/>
+          <Item Value="TotPnltyPnts"/>
+          <Item Value="TotPoints"/>
+          <Item Value="ActionReqFail"/>
+          <Item Value="PasFail"/>
+          <Item Value="Remarks"/>
+          <Item Value="Inspection"/>
+          <Item Value="InsDate"/>
+          <Item Value="NoChkdQtyInch"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="ProdPageFirstDetVO1Iterator" id="CreateInsert7"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="ProdPageFirstDetVO1Iterator" id="Delete8"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="MnjMfgFabinsPtrnalocLView1Iterator"
+          id="MnjMfgFabinsPtrnalocLView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgFabinsPtrnalocLView"
+                      Name="MnjMfgFabinsPtrnalocLView10">
+        <AttrNames>
+          <Item Value="ShrinkPattern"/>
+          <Item Value="LengthWiseTo"/>
+          <Item Value="WidthWiseFrom"/>
+          <Item Value="WidthWiseTo"/>
+          <Item Value="TotalRolls"/>
+          <Item Value="TotalYrds"/>
+          <Item Value="Reamarks"/>
+          <Item Value="LengthWiseFrom"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="MnjMfgFabinsPtrnalocDView1Iterator"
+          id="MnjMfgFabinsPtrnalocDView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgFabinsPtrnalocDView"
+                      Name="MnjMfgFabinsPtrnalocDView10">
+        <AttrNames>
+          <Item Value="SupplierSrNo"/>
+          <Item Value="RollNo"/>
+          <Item Value="ShrinkLength"/>
+          <Item Value="ShrinkWidth"/>
+          <Item Value="RollLength"/>
+          <Item Value="Remarks"/>
+          <Item Value="SupplierRollNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MnjMfgFabinsPtrnalocDView1Iterator" id="CreateInsert8"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MnjMfgFabinsPtrnalocDView1Iterator" id="Delete9"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="MnjMfgFabinsPtrnalocLView1Iterator" id="CreateInsert9"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MnjMfgFabinsPtrnalocLView1Iterator" id="Delete10"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="ProdPatternAlocRolsVO1Iterator"
+          id="ProdPatternAlocRolsVO1">
+      <nodeDefinition DefName="mnj.mfg.model.lovviews.ProdPatternAlocRolsVO"
+                      Name="ProdPatternAlocRolsVO10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="RollLength"/>
+          <Item Value="ShrinkLength"/>
+          <Item Value="ShrinkWidth"/>
+          <Item Value="PatFlag" Binds="PatFlag"/>
+          <Item Value="ShrinkPrcLength"/>
+          <Item Value="ShrinkPrcWidth"/>
+          <Item Value="SuppRollNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="ProdPatternAlocRolsVO1Iterator" id="PatFlag"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="PatFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="populatePatternAloc"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="populatePatternAloc"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="setPtrnAlocRollsWhere"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setPtrnAlocRollsWhere"
+                  IsViewObjectMethod="false"/>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="UnitName">
+      <AttrNames>
+        <Item Value="UnitName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="ProdShadeRollsVO1Iterator" id="ProdShadeRollsVO1">
+      <nodeDefinition DefName="mnj.mfg.model.lovviews.ProdShadeRollsVO"
+                      Name="ProdShadeRollsVO10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="CutWidth"/>
+          <Item Value="Color"/>
+          <Item Value="Style"/>
+          <Item Value="ProdShdFlag" Binds="ProdShdFlag"/>
+          <Item Value="SuppRollNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="ProdShadeRollsVO1Iterator" id="ProdShdFlag"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ProdShdFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="setProdShadeRolsWhereClause"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setProdShadeRolsWhereClause"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="selectAllLinesFabricShade"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="selectAllLinesFabricShade"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="flag" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="selectAllLinesFabricRollInsp"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="selectAllLinesFabricRollInsp"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="flag" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="creatFabricOunceLine" InstanceName="AppModuleDataControl.dataProvider" DataControl="AppModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="creatFabricOunceLine" IsViewObjectMethod="false"/>
+    <methodAction id="setFabInsRollWhrCls" InstanceName="AppModuleDataControl.dataProvider" DataControl="AppModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="setFabInsRollWhrCls" IsViewObjectMethod="false">
+      <NamedData NDName="type" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="HeaderId">
+      <AttrNames>
+        <Item Value="HeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="SelectAllLinesPatAlloc"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="SelectAllLinesPatAlloc"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="flag" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="SmartCalculation"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="SmartCalculation"
+                  IsViewObjectMethod="false"/>
+    <button IterBinding="FabOuncePopUpVO1Iterator" id="SelpRol1"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SelpRol"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ProdFbShrnkRollVO1Iterator" id="SelpRol"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SelpRol"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="FabOuncePopUpVO1Iterator" id="FabOuncePopUpVO1">
+      <nodeDefinition DefName="mnj.mfg.model.lovviews.FabOuncePopUpVO"
+                      Name="FabOuncePopUpVO10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="SuppRollNo"/>
+          <Item Value="Selection" Binds="Selection"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="FabOuncePopUpVO1Iterator" id="Selection"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Selection"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="setPopUpWhereClauseBalance"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setPopUpWhereClauseBalance"
+                  IsViewObjectMethod="false"/>
+    <tree IterBinding="NewBalancePopUp1Iterator" id="NewBalancePopUp1">
+      <nodeDefinition DefName="mnj.mfg.model.lovviews.NewBalancePopUp"
+                      Name="NewBalancePopUp10">
+        <AttrNames>
+          <Item Value="RawColor"/>
+          <Item Value="BalanceRolls"/>
+          <Item Value="BalanceYards"/>
+          <Item Value="BalanceInch"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="Lot">
+      <AttrNames>
+        <Item Value="Lot"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="FabricShrinkLines1Iterator" id="FabricShrinkLines11">
+      <nodeDefinition DefName="mnj.mfg.model.views.FabricShrinkLines"
+                      Name="FabricShrinkLines110">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="SuppRollNo"/>
+          <Item Value="TransferRollFlag" Binds="TransferRollFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="FabricShrinkLines1Iterator" id="TransferRollFlag"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="TransferRollFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="TransferRollHeaderVO1Iterator"
+          id="TransferRollHeaderVO1">
+      <nodeDefinition DefName="mnj.mfg.model.lovviews.TransferRollHeaderVO"
+                      Name="TransferRollHeaderVO10">
+        <AttrNames>
+          <Item Value="DocumentNo"/>
+          <Item Value="ReferenceNo"/>
+          <Item Value="TransferHeaderFlag" Binds="TransferHeaderFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="TransferRollHeaderVO1Iterator" id="TransferHeaderFlag"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="TransferHeaderFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="RollTransfertoHeader"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="RollTransfertoHeader"
+                  IsViewObjectMethod="false"/>
+    <tree IterBinding="RollTransferHistoryVO1Iterator"
+          id="RollTransferHistoryVO1">
+      <nodeDefinition DefName="mnj.mfg.model.entities.RollTransferHistoryVO"
+                      Name="RollTransferHistoryVO10">
+        <AttrNames>
+          <Item Value="FactoryRollNo"/>
+          <Item Value="SupplierRollNo"/>
+          <Item Value="TransferToDoc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="MnjSkewMovementVO1Iterator" id="MnjSkewMovementVO1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjSkewMovementVO"
+                      Name="MnjSkewMovementVO10">
+        <AttrNames>
+          <Item Value="SkewLineId"/>
+          <Item Value="ProdLId"/>
+          <Item Value="RollNo"/>
+          <Item Value="Ac"/>
+          <Item Value="Bd"/>
+          <Item Value="AcMinusBd"/>
+          <Item Value="AcAddBd"/>
+          <Item Value="Result"/>
+          <Item Value="Remarks"/>
+          <Item Value="SkewInspection"/>
+          <Item Value="SkewInspectionDate"/>
+          <Item Value="Passfail"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MnjSkewMovementVO1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MnjSkewMovementVO1Iterator" id="Delete11"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="RollForSkewMovementVO1Iterator"
+          id="RollForSkewMovementVO1">
+      <nodeDefinition DefName="mnj.mfg.model.lovviews.RollForSkewMovementVO"
+                      Name="RollForSkewMovementVO10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="SuppRollNo"/>
+          <Item Value="Color"/>
+          <Item Value="Style"/>
+          <Item Value="SkewRollFlag" Binds="SkewRollFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="RollForSkewMovementVO1Iterator" id="SkewRollFlag"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SkewRollFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="MnjSkewMovementDVO1Iterator" id="MnjSkewMovementDVO1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjSkewMovementDVO"
+                      Name="MnjSkewMovementDVO10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="Ac"/>
+          <Item Value="Bd"/>
+          <Item Value="AcMinusBd"/>
+          <Item Value="AcAddBd"/>
+          <Item Value="Result"/>
+          <Item Value="Remarks"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MnjSkewMovementDVO1Iterator" id="Delete12"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="ProdPageLinesVO1Iterator" id="ProdPageLinesVO1">
+      <nodeDefinition DefName="mnj.mfg.model.views.ProdPageLinesVO"
+                      Name="ProdPageLinesVO10">
+        <AttrNames>
+          <Item Value="SystemId"/>
+          <Item Value="BuyerName"/>
+          <Item Value="Season"/>
+          <Item Value="Style"/>
+          <Item Value="WashName"/>
+          <Item Value="Color"/>
+          <Item Value="FabOunce"/>
+          <Item Value="FabCons"/>
+          <Item Value="FabComp"/>
+          <Item Value="Inspection"/>
+          <Item Value="Remarks"/>
+          <Item Value="TotalAlocRolls"/>
+          <Item Value="TotalAlocYrds"/>
+          <Item Value="TotalAlocInch"/>
+          <Item Value="BlncYrds"/>
+          <Item Value="BlncInch"/>
+          <Item Value="DjCutWidth"/>
+          <Item Value="BuyerId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

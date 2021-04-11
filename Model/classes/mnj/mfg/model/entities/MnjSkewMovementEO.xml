@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjSkewMovementEO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="MNJ_SKEW_MOVEMENT"
+  AliasName="MnjSkewMovementEO"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  CollClass="mnj.mfg.model.entities.MnjSkewMovementEOCollImpl"
+  RowClass="mnj.mfg.model.entities.MnjSkewMovementEOImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML|Coll"/>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="SkewLineId"
+    IsNotNull="true"
+    ColumnName="SKEW_LINE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_SKEW_MOVEMENT"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ProdLId"
+    ColumnName="PROD_L_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RollNo"
+    Precision="250"
+    ColumnName="ROLL_NO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Ac"
+    ColumnName="AC"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Bd"
+    ColumnName="BD"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AcMinusBd"
+    ColumnName="AC_MINUS_BD"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AcAddBd"
+    ColumnName="AC_ADD_BD"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Result"
+    ColumnName="RESULT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Remarks"
+    Precision="500"
+    ColumnName="REMARKS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdateDate"
+    ColumnName="LAST_UPDATE_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedBy"
+    Precision="15"
+    Scale="0"
+    ColumnName="LAST_UPDATED_BY"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreationDate"
+    ColumnName="CREATION_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    Precision="15"
+    Scale="0"
+    ColumnName="CREATED_BY"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Passfail"
+    Precision="50"
+    ColumnName="PASSFAIL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SkewInspection"
+    Precision="100"
+    ColumnName="SKEW_INSPECTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SkewInspectionDate"
+    ColumnName="SKEW_INSPECTION_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="MNJ_SKEW_MOVEMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="MnjMfgFabinsProdLEO"
+    Association="mnj.mfg.model.entities.MnjSkewMovementFkAssoc"
+    AssociationEnd="mnj.mfg.model.entities.MnjSkewMovementFkAssoc.MnjMfgFabinsProdLEO"
+    AssociationOtherEnd="mnj.mfg.model.entities.MnjSkewMovementFkAssoc.MnjSkewMovementEO"
+    Type="mnj.mfg.model.entities.MnjMfgFabinsProdLEOImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="MnjSkewMovementDEO"
+    Association="mnj.mfg.model.entities.MnjSkewMovementDFk1Assoc"
+    AssociationEnd="mnj.mfg.model.entities.MnjSkewMovementDFk1Assoc.MnjSkewMovementDEO"
+    AssociationOtherEnd="mnj.mfg.model.entities.MnjSkewMovementDFk1Assoc.MnjSkewMovementEO"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="MnjSkewMovementPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MNJ_SKEW_MOVEMENT_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.MnjSkewMovementEO.SkewLineId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC001530741">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C001530741"/>
+      <Attr Name="_checkCondition" Value='"SKEW_LINE_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.MnjSkewMovementEO.SkewLineId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MnjSkewMovementFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MNJ_MFG_FABINS_PROD_L_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MNJ_SKEW_MOVEMENT_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.MnjSkewMovementEO.ProdLId"/>
+    </AttrArray>
+  </Key>
+</Entity>

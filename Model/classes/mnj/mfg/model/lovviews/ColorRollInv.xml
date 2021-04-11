@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ColorRollInv"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="mnj.mfg.model.lovviews.ColorRollInvRowImpl"
+  ComponentClass="mnj.mfg.model.lovviews.ColorRollInvImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.lovviews.ColorRollInv_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P_BUYER_ID"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_STYLE_NAME"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_SEASON"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery>
+    <![CDATA[SELECT DISTINCT 
+       CMOBO.COLOR
+  FROM 
+       MNJ_MFG_FABINS_INVL          I
+      ,MNJ_MFG_FABINS_INVL_D        MMFPL
+      ,CUST_MNJ_ONT_BOM             CMOB
+      ,MNJ_BOM_BPO_LINES_ALL        MBBL
+      ,CUST_MNJ_ONT_BOM_RMLINE      CMOBR
+      ,CUST_MNJ_ONT_BOM_OBLINE      CMOBO
+      ,MNJ_MFG_FABRIC_INS_TEST_H    MMFIH 
+ WHERE 
+       I.LINE_ID                    = MMFPL.LINE_ID
+   AND MMFPL.BUYER_ID               = CMOB.BUYER_ID
+   AND MMFPL.STYLE                  = CMOB.STYLE_NAME_C
+   AND MBBL.BOM_ID                  = CMOB.BOM_ID
+   AND MBBL.SEASON                  = MMFPL.SEASON
+   AND CMOBR.BOM_ID                 = CMOB.BOM_ID
+   AND CMOBO.BOM_RMLINE_ID          = CMOBR.BOM_RMLINE_ID
+   AND I.HEADER_ID                  = MMFIH.HEADER_ID
+   AND MMFPL.BUYER_ID               = :P_BUYER_ID
+   AND MMFPL.STYLE                  = :P_STYLE_NAME
+   AND MBBL.SEASON                  = :P_SEASON
+   AND (SELECT FFV.DESCRIPTION
+          FROM MTL_SYSTEM_ITEMS MSI, FND_FLEX_VALUES_VL FFV
+         WHERE FFV.FLEX_VALUE_SET_ID = 1014895
+           AND FFV.FLEX_VALUE = MSI.SEGMENT4
+           AND MSI.ORGANIZATION_ID = 353
+           AND MSI.INVENTORY_ITEM_ID = CMOBR.INVENTORY_ITEM_ID ) = I.COLOR]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="Color"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COLOR"
+    Expression="COLOR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ProdPageShedDetVO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  SelectList="MnjMfgFabinstestShdLdEO.DETAIL_ID, 
+       MnjMfgFabinstestShdLdEO.LINE_ID, 
+       MnjMfgFabinstestShdLdEO.ROLL_NO, 
+       MnjMfgFabinstestShdLdEO.SUPPLIER_ROLL_NO"
+  FromList="MNJ_MFG_FABINSTEST_SHD_LD MnjMfgFabinstestShdLdEO"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.views.ProdPageShedDetVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="RollNoLOV1"
+    ViewObjectName="mnj.mfg.model.lovviews.RollNoLOV"
+    RowLevelBinds="true"/>
+  <EntityUsage
+    Name="MnjMfgFabinstestShdLdEO"
+    Entity="mnj.mfg.model.entities.MnjMfgFabinstestShdLdEO"/>
+  <ViewAttribute
+    Name="DetailId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DetailId"
+    EntityUsage="MnjMfgFabinstestShdLdEO"
+    AliasName="DETAIL_ID"/>
+  <ViewAttribute
+    Name="LineId"
+    PrecisionRule="true"
+    EntityAttrName="LineId"
+    EntityUsage="MnjMfgFabinstestShdLdEO"
+    AliasName="LINE_ID"/>
+  <ViewAttribute
+    Name="RollNo"
+    PrecisionRule="true"
+    EntityAttrName="RollNo"
+    EntityUsage="MnjMfgFabinstestShdLdEO"
+    AliasName="ROLL_NO"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+  <ViewAttribute
+    Name="SupplierRollNo"
+    PrecisionRule="true"
+    EntityAttrName="SupplierRollNo"
+    EntityUsage="MnjMfgFabinstestShdLdEO"
+    AliasName="SUPPLIER_ROLL_NO"/>
+</ViewObject>

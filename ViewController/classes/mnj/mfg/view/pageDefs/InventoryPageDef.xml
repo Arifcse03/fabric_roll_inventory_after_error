@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.62.29" id="InventoryPageDef"
+                Package="mnj.mfg.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="HeaderVO1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="HeaderVO1Iterator"
+              ChangeEventPolicy="ppr"/>
+    <iterator Binds="InvPageLinesVO1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="InvPageLinesVO1Iterator"
+              ChangeEventPolicy="ppr"/>
+    <searchRegion Binds="InvPageLinesVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="InvPageLinesVO1Query"/>
+    <iterator Binds="InvPageDetailsVO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="InvPageDetailsVO1Iterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="InvPageLinesDet2VO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="InvPageLinesDet2VO1Iterator"/>
+    <searchRegion Binds="InvPageLinesDet2VO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="InvPageLinesDet2VO1Query"/>
+    <iterator Binds="InvoiceVo1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="InvoiceVo1Iterator"/>
+    <searchRegion Binds="InvoiceVo1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="InvoiceVo1Query"/>
+    <iterator Binds="FillRollVO1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="FillRollVO1Iterator"/>
+    <searchRegion Binds="FillRollVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="FillRollVO1Query"/>
+    <iterator Binds="FillRollNewVO2" RangeSize="25"
+              DataControl="AppModuleDataControl" id="FillRollNewVO2Iterator"/>
+    <searchRegion Binds="FillRollNewVO2Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="FillRollNewVO2Query"/>
+    <iterator Binds="FilterView1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="FilterView1Iterator"/>
+    <iterator Binds="InvoiceWiseSupplierLOV1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="InvoiceWiseSupplierLOV1Iterator"/>
+    <searchRegion Binds="InvoiceWiseSupplierLOV1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="InvoiceWiseSupplierLOV1Query"/>
+    <searchRegion Binds="InvPageDetailsVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="InvPageDetailsVO1Query"/>
+    <invokeAction id="setsessionValue" Binds="setSessionValues"
+                  Refresh="always"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="HeaderNo">
+      <AttrNames>
+        <Item Value="HeaderNo"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="HeaderVO1Iterator"
+                  Uses="LOV_ReceiveNo" id="ReceiveNo"/>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="UpdateOn">
+      <AttrNames>
+        <Item Value="UpdateOn"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="HeaderVO1Iterator" id="First"
+            RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="HeaderVO1Iterator" id="Previous"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="HeaderVO1Iterator" id="Next" RequiresUpdateModel="true"
+            Action="next"/>
+    <action IterBinding="HeaderVO1Iterator" id="Last" RequiresUpdateModel="true"
+            Action="last"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="BuyerId">
+      <AttrNames>
+        <Item Value="BuyerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="OrgId">
+      <AttrNames>
+        <Item Value="OrgId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="InvPageLinesVO1Iterator" id="InvPageLinesVO1">
+      <nodeDefinition DefName="mnj.mfg.model.views.InvPageLinesVO"
+                      Name="InvPageLinesVO10">
+        <AttrNames>
+          <Item Value="Color"/>
+          <Item Value="TotalRolls"/>
+          <Item Value="TotalYards"/>
+          <Item Value="FinishClor"/>
+          <Item Value="FabConst"/>
+          <Item Value="FabComp"/>
+          <Item Value="FabOunce"/>
+          <Item Value="HeaderId"/>
+          <Item Value="LineId"/>
+          <Item Value="StyleSeason"/>
+          <Item Value="ArticleNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="InvPageLinesVO1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="InvPageLinesVO1Iterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="InvPageDetailsVO1Iterator" id="CreateInsert1"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="InvPageDetailsVO1Iterator" id="Delete1"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="InvPageLinesDet2VO1Iterator" id="InvPageLinesDet2VO1">
+      <nodeDefinition DefName="mnj.mfg.model.views.InvPageLinesDet2VO"
+                      Name="InvPageLinesDet2VO10">
+        <AttrNames>
+          <Item Value="RollNo"/>
+          <Item Value="RollLength"/>
+          <Item Value="RollWidth"/>
+          <Item Value="ShrinkLength"/>
+          <Item Value="ShrinkWidth"/>
+          <Item Value="Shade"/>
+          <Item Value="Remarks"/>
+          <Item Value="RollSrNo"/>
+          <Item Value="RollLength2"/>
+          <Item Value="Uom"/>
+          <Item Value="RolLength3"/>
+          <Item Value="RolLength4"/>
+          <Item Value="SupplierSerialNo"/>
+          <Item Value="TransferSelection" Binds="TransferSelection"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="InvPageLinesDet2VO1Iterator" id="CreateInsert2"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="InvPageLinesDet2VO1Iterator" id="Delete2"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="VendorName">
+      <AttrNames>
+        <Item Value="VendorName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="GrnDates">
+      <AttrNames>
+        <Item Value="GrnDates"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="InvPageLinesDet2VO1Iterator" id="Uom">
+      <AttrNames>
+        <Item Value="Uom"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getRollSerialNo"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getRollSerialNo"
+                  IsViewObjectMethod="false"/>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="GrnOrInvoice">
+      <AttrNames>
+        <Item Value="GrnOrInvoice"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="HeaderVO1Iterator"
+                  Uses="LOV_RollTransferOrganization"
+                  id="RollTransferOrganization"/>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="RollTransferOrg">
+      <AttrNames>
+        <Item Value="RollTransferOrg"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="RollTransfer"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="RollTransfer"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.RollTransfer_AppModuleDataControl_dataProvider_RollTransfer_result"/>
+    <button IterBinding="InvPageLinesDet2VO1Iterator" id="TransferSelection"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="TransferSelection"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="popupSelectActionListener"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="popupSelectActionListener"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="popupDeselectActionListener"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="popupDeselectActionListener"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="RollTransferWhole"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="RollTransferWhole"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.RollTransferWhole_AppModuleDataControl_dataProvider_RollTransferWhole_result"/>
+    <methodAction id="Detele_All_RecordsLines"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Detele_All_RecordsLines"
+                  IsViewObjectMethod="false"/>
+    <attributeValues IterBinding="HeaderVO1Iterator" id="InvoiceNo">
+      <AttrNames>
+        <Item Value="InvoiceNo"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="HeaderVO1Iterator" id="TransferDoc"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="TransferDoc"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="InvoiceVo1Iterator" id="InvoiceVo1">
+      <nodeDefinition DefName="mnj.mfg.model.views.InvoiceVo"
+                      Name="InvoiceVo10">
+        <AttrNames>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="ImpBblcPiDetailId"/>
+          <Item Value="ImpBblcDetailId"/>
+          <Item Value="InvoiceNo"/>
+          <Item Value="InventoryItemId"/>
+          <Item Value="Spo"/>
+          <Item Value="StyleSeason"/>
+          <Item Value="ShipNumber"/>
+          <Item Value="OrgId"/>
+          <Item Value="ReceiptNum"/>
+          <Item Value="Color"/>
+          <Item Value="AgentId"/>
+          <Item Value="AgentName"/>
+          <Item Value="Style"/>
+          <Item Value="Season"/>
+          <Item Value="VendorId"/>
+          <Item Value="GrnDate"/>
+          <Item Value="Supplier"/>
+          <Item Value="Buyerid"/>
+          <Item Value="Buyername"/>
+          <Item Value="OrganizationName"/>
+          <Item Value="Construction"/>
+          <Item Value="Composition"/>
+          <Item Value="FabOunce"/>
+          <Item Value="PartialPl"/>
+          <Item Value="CheckBox" Binds="CheckBox"/>
+          <Item Value="PiNo"/>
+          <Item Value="ArticleNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="InvoiceVo1Iterator" id="CheckBox"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CheckBox"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="y"/>
+        <Item Value="n"/>
+      </ValueList>
+    </button>
+    <list IterBinding="HeaderVO1Iterator" StaticList="false" Uses="LOV_UnitName"
+          id="UnitName" DTSupportsMRU="true"/>
+    <tree IterBinding="FillRollVO1Iterator" id="FillRollVO1">
+      <nodeDefinition DefName="mnj.mfg.model.views.FillRollVO"
+                      Name="FillRollVO10">
+        <AttrNames>
+          <Item Value="Buyername"/>
+          <Item Value="Style"/>
+          <Item Value="Season"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="SupplierSerialNo"/>
+          <Item Value="RollSrNo"/>
+          <Item Value="TotalRolls"/>
+          <Item Value="TotalYards"/>
+          <Item Value="InventoryItemId"/>
+          <Item Value="RollNo"/>
+          
+          <Item Value="SelectBox" Binds="SelectBox"/>
+          <Item Value="OrganizationName"/>
+          <Item Value="OrgId"/>
+          <Item Value="PiNo"/>
+          <Item Value="Spo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="SelectAllRoll"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="SelectAllRoll"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="flag" NDType="java.lang.String"/>
+    </methodAction>
+    <button IterBinding="FillRollVO1Iterator" id="SelectBox"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SelectBox"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="resetViewObject"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="resetViewObject"
+                  IsViewObjectMethod="false"/>
+    <tree IterBinding="FillRollNewVO2Iterator" id="FillRollNewVO2">
+      <nodeDefinition DefName="mnj.mfg.model.views.FillRollNewVO"
+                      Name="FillRollNewVO20">
+        <AttrNames>
+          <Item Value="InvoiceNo"/>
+          <Item Value="RollNo"/>
+          <Item Value="SuppRollNo"/>
+          <Item Value="TotalAlocRolls"/>
+          <Item Value="TotalAlocYrds"/>
+          <Item Value="TotalAlocInch"/>
+          <Item Value="AlocYard"/>
+          <Item Value="AlocInch"/>
+          <Item Value="BuyerId"/>
+          <Item Value="BuyerName"/>
+          <Item Value="Season"/>
+          <Item Value="Style"/>
+          <Item Value="Color"/>
+          <Item Value="RawColor"/>
+          <Item Value="SelctionBox" Binds="SelctionBox"/>
+          <Item Value="OrgId"/>
+          <Item Value="RollLength"/>
+          <Item Value="RollLength2"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="FillRollNewVO2Iterator" id="SelctionBox"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SelctionBox"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <listOfValues StaticList="false" IterBinding="FilterView1Iterator"
+                  Uses="LOV_Buyer" id="Buyer"/>
+    <listOfValues StaticList="false" IterBinding="FilterView1Iterator"
+                  Uses="LOV_Season" id="Season1"/>
+    <listOfValues StaticList="false" IterBinding="FilterView1Iterator"
+                  Uses="LOV_Style" id="Style"/>
+    <listOfValues StaticList="false" IterBinding="FilterView1Iterator"
+                  Uses="LOV_Invoice" id="Invoice"/>
+    <tree IterBinding="InvoiceWiseSupplierLOV1Iterator"
+          id="InvoiceWiseSupplierLOV1">
+      <nodeDefinition DefName="mnj.mfg.model.lovviews.InvoiceWiseSupplierLOV"
+                      Name="InvoiceWiseSupplierLOV10">
+        <AttrNames>
+          <Item Value="SupplierName"/>
+          <Item Value="SupplierId"/>
+          <Item Value="SpoDate"/>
+          <Item Value="InvoiceNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="InvPageDetailsVO1Iterator" id="InvPageDetailsVO1">
+      <nodeDefinition DefName="mnj.mfg.model.views.InvPageDetailsVO"
+                      Name="InvPageDetailsVO10">
+        <AttrNames>
+          <Item Value="PocId"/>
+          <Item Value="BuyerName"/>
+          <Item Value="Style"/>
+          <Item Value="Season"/>
+          <Item Value="DetailId"/>
+          <Item Value="LineId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="setSessionValues"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setSessionValues"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="orgId" NDValue="#{viewScope.OrgId}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="userId" NDValue="#{viewScope.UserId}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="respId" NDValue="#{viewScope.RespId}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="respAppl" NDValue="#{viewScope.RespAppId}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

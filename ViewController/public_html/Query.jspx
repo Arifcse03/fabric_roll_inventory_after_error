@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelGroupLayout layout="vertical" id="pgl1"
+                             inlineStyle="height:759px;">
+          <af:panelHeader text="Search Page" id="ph1"
+                          inlineStyle=" height:736px;">
+            <af:query id="qryId1" headerText="Search" disclosed="true"
+                      value="#{bindings.HeaderVOCriteriaQuery.queryDescriptor}"
+                      model="#{bindings.HeaderVOCriteriaQuery.queryModel}"
+                      queryListener="#{bindings.HeaderVOCriteriaQuery.processQuery}"
+                      queryOperationListener="#{bindings.HeaderVOCriteriaQuery.processQueryOperation}"
+                      resultComponentId="pc1:resId1" visible="false"/>
+            <af:panelCollection id="pc1"
+                                inlineStyle="height:590px; width:1000.0px;"
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t1">
+                  <af:commandButton actionListener="#{bindings.CreateInsert.execute}"
+                                    text="Create"
+                                    disabled="#{sessionScope.FormVal=='INV'? 'false':'true'}"
+                                    id="cb1" action="goRouter"
+                                    inlineStyle="height:25.0px;"/>
+                  <af:commandButton text="Open" id="cb5"
+                                    action="goRouter"
+                                    inlineStyle="height:25.0px;"
+                                    visible="false"/>
+                  <af:commandButton actionListener="#{bindings.Delete.execute}"
+                                    text="Delete"
+                                    disabled="#{sessionScope.FormVal=='INV'? 'false':'true'}"
+                                    id="cb2" inlineStyle="height:25.0px;"/>
+                  <af:commandButton actionListener="#{bindings.Commit.execute}"
+                                    text="Save"
+                                    disabled="#{!bindings.Commit.enabled}"
+                                    id="cb3" inlineStyle="height:25.0px;"/>
+                  <af:commandButton text="Goto Inventory" id="cb8"
+                                    action="go to inventory"
+                                    inlineStyle="height:25.0px;"/>
+                  <af:commandButton text="Go to Production" id="cb9"
+                                    action="*gotoproduction"
+                                    inlineStyle="height:25.0px;"/>
+                  <af:commandButton actionListener="#{bindings.Rollback.execute}"
+                                    text="Undo"
+                                    disabled="#{!bindings.Rollback.enabled}"
+                                    immediate="true" id="cb4"
+                                    inlineStyle="height:25.0px;">
+                    <af:resetActionListener/>
+                  </af:commandButton>
+                  <af:commandButton text="setCurrentRowWithKey" id="cb7"
+                                    actionListener="#{bindings.setCurrentRowWithKey.execute}"
+                                    disabled="#{!bindings.setCurrentRowWithKey.enabled}"
+                                    action="go to inventory" visible="false"/>
+                  <af:commandButton text="OpenInventory" id="cb6"
+                                    action="go to inventory" visible="false"/>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.HeaderVO1.collectionModel}" var="row"
+                        rows="#{bindings.HeaderVO1.rangeSize}"
+                        emptyText="#{bindings.HeaderVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.HeaderVO1.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.HeaderVOCriteriaQuery.queryDescriptor}"
+                        queryListener="#{bindings.HeaderVOCriteriaQuery.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.HeaderVO1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.HeaderVO1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="resId1"
+                        partialTriggers="::cb1 ::cb2 ::cb7" width="100%">
+                <af:column sortProperty="HeaderNo" filterable="true"
+                           sortable="true" headerText="Doc. No" id="resId1c1"
+                           align="center" filterFeatures="caseInsensitive"
+                           inlineStyle="height:25.0px;">
+                  <af:commandLink id="ot10" text="#{row.HeaderNo}"
+                                  action="goRouter"/>
+                </af:column>
+                <af:column sortProperty="ReceiveNo" filterable="true"
+                           sortable="true" headerText="Receive No. "
+                           id="resId1c2" align="center"
+                           filterFeatures="caseInsensitive" visible="false">
+                  <af:outputText value="#{row.ReceiveNo}" id="ot8"/>
+                </af:column>
+                <af:column sortProperty="InvoiceNo" filterable="true"
+                           sortable="true" headerText="Invoice No."
+                           id="resId1c3" align="center"
+                           filterFeatures="caseInsensitive" width="150">
+                  <af:outputText value="#{row.InvoiceNo}" id="ot3"/>
+                </af:column>
+                <af:column headerText="Buyer"
+                           id="c2" sortable="true" filterable="true"
+                           sortProperty="BuyerName"
+                           filterFeatures="caseInsensitive" align="center"
+                           width="140">
+                  <af:outputText value="#{row.BuyerName}" id="ot2"/>
+                </af:column>
+                <af:column headerText="Color"
+                           id="c1" align="center" sortable="true"
+                           filterable="true" sortProperty="ColorL"
+                           filterFeatures="caseInsensitive" width="140">
+                  <af:outputText value="#{row.ColorL}" id="ot5"/>
+                </af:column>
+                <af:column headerText="Style"
+                           id="c3" align="center" sortable="true"
+                           filterable="true" sortProperty="StyleL"
+                           filterFeatures="caseInsensitive" width="140">
+                  <af:outputText value="#{row.StyleL}" id="ot4"/>
+                </af:column>
+                <af:column headerText="Season/Lot"
+                           id="c4" align="center" sortable="true"
+                           filterable="true" sortProperty="SeasonL"
+                           filterFeatures="caseInsensitive">
+                  <af:outputText value="#{row.SeasonL}" id="ot6"/>
+                </af:column>
+                <af:column headerText="Remarks"
+                           id="c5" sortable="true" filterable="true"
+                           align="center" sortProperty="Lot"
+                           filterFeatures="caseInsensitive">
+                  <af:outputText value="#{row.Lot}" id="ot1"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelHeader>
+        </af:panelGroupLayout>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

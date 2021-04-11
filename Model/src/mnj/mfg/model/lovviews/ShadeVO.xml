@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ShadeVO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.lovviews.ShadeVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery>
+    <![CDATA[SELECT ffv.flex_value
+      FROM fnd_flex_value_sets ffvs,
+           fnd_flex_values     ffv,
+           fnd_flex_values_tl  ffvt
+     WHERE ffvs.flex_value_set_id = ffv.flex_value_set_id
+       and ffv.flex_value_id = ffvt.flex_value_id
+       and flex_value_set_name like 'ODM_SHADES'
+       and ffv.enabled_flag = 'Y'
+      /* and ffv.flex_value not in 
+       (
+       SELECT SHADE
+      FROM MNJ_MFG_FABRIC_INS_TEST_H MMFPH, 
+           MNJ_MFG_FABINS_PROD_L MMFPL, 
+           MNJ_MFG_FABRIC_INS_TEST_SHD_L MMFPLD
+     WHERE MMFPL.PROD_L_ID = MMFPLD.PROD_L_ID
+       AND MMFPH.HEADER_ID = MMFPL.HEADER_ID
+       AND MMFPL.BUYER_ID  = :P_BUYER_ID
+       AND MMFPL.STYLE     = :P_STYLE
+       AND MMFPL.SEASON    = :P_SEASON
+       AND MMFPL.COLOR     = :P_COLOR
+       AND MMFPH.HEADER_ID = :P_HEADER_NO
+       )*/
+     order by ffv.flex_value]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="FlexValue"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FLEX_VALUE"
+    Expression="FLEX_VALUE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="5"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

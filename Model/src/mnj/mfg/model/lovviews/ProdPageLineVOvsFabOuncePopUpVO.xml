@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ProdPageLineVOvsFabOuncePopUpVO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.lovviews.ProdPageLineVOvsFabOuncePopUpVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="ProdPageLinesVO"
+    Cardinality="1"
+    Owner="mnj.mfg.model.views.ProdPageLinesVO"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="ProdPageLinesVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.views.ProdPageLinesVO.ProdLId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="FabOuncePopUpVO"
+    Cardinality="-1"
+    Owner="mnj.mfg.model.lovviews.FabOuncePopUpVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="FabOuncePopUpVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.lovviews.FabOuncePopUpVO.ProdLId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="InvoiceWiseSupplierLOV"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.lovviews.InvoiceWiseSupplierLOV_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery>
+    <![CDATA[SELECT DISTINCT ASUP.VENDOR_NAME Supplier_Name,
+                  ASUP.VENDOR_ID SUPPLIER_ID,
+                  --PD.PO_DATE SPO_DATE,
+                  details.INVOICE_NO
+    FROM IEDOC_IMP_PI_LINES PL,
+         IEDOC_IMP_PI_DETAILS PD,
+         PI_BBLC_V PIV,
+         AP_SUPPLIERS ASUP,
+         IEDOC_IMP_BBLC_DETAILS details,
+         IEDOC_IMP_BBLC_SUB_DET_AI details_ai,
+         IEDOC_IMP_BBLC_SUB_DET_PI details_pi,
+         HR_ORGANIZATION_UNITS HRU
+   WHERE     PIV.PI_NO = PL.PI_NO(+)
+         AND PL.IMP_PI_LINE_ID = PD.IMP_PI_LINE_ID(+)
+         AND ASUP.VENDOR_ID = PL.SUPPLIER_ID
+         AND PIV.IMP_BBLC_LINE_ID = details.IMP_BBLC_LINE_ID(+)
+         AND details.IMP_BBLC_DETAIL_ID = details_ai.IMP_BBLC_DETAIL_ID(+)
+         AND HRU.ORGANIZATION_ID = PL.ORG_ID
+         AND details.IMP_BBLC_DETAIL_ID = details_pi.IMP_BBLC_DETAIL_ID(+) -- added AND  4.1.2017
+         AND details.INVOICE_NO IS NOT NULL]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="SupplierName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SUPPLIER_NAME"
+    Expression="SUPPLIER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SupplierId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="SUPPLIER_ID"
+    Expression="SUPPLIER_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SpoDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="SPO_DATE"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InvoiceNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INVOICE_NO"
+    Expression="INVOICE_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

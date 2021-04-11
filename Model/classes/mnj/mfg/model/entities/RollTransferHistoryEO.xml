@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RollTransferHistoryEO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="MNJ_FABINS_ROLL_TRANS_HIST"
+  AliasName="RollTransferHistoryEO"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="mnj.mfg.model.entities.RollTransferHistoryEOImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="HistoryId"
+    IsNotNull="true"
+    ColumnName="HISTORY_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_FABINS_ROLL_TRANS_HIST"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ProdLId"
+    ColumnName="PROD_L_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_FABINS_ROLL_TRANS_HIST">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FactoryRollNo"
+    Precision="500"
+    ColumnName="FACTORY_ROLL_NO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_FABINS_ROLL_TRANS_HIST">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SupplierRollNo"
+    Precision="500"
+    ColumnName="SUPPLIER_ROLL_NO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_FABINS_ROLL_TRANS_HIST">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TransferToDoc"
+    Precision="100"
+    ColumnName="TRANSFER_TO_DOC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_FABINS_ROLL_TRANS_HIST">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="MnjMfgFabinsProdLEO"
+    Association="mnj.mfg.model.entities.MnjFabinsRollTransHistFkAssoc"
+    AssociationEnd="mnj.mfg.model.entities.MnjFabinsRollTransHistFkAssoc.MnjMfgFabinsProdLEO"
+    AssociationOtherEnd="mnj.mfg.model.entities.MnjFabinsRollTransHistFkAssoc.RollTransferHistoryEO"
+    Type="mnj.mfg.model.entities.MnjMfgFabinsProdLEOImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MnjFabinsRollTransHistPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MNJ_FABINS_ROLL_TRANS_HIST_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.RollTransferHistoryEO.HistoryId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MnjFabinsRollTransHistFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MNJ_MFG_FABINS_PROD_L_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MNJ_FABINS_ROLL_TRANS_HIST_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.RollTransferHistoryEO.ProdLId"/>
+    </AttrArray>
+  </Key>
+</Entity>

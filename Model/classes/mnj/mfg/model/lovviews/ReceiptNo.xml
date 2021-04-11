@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ReceiptNo"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.lovviews.ReceiptNo_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="p_org_id"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <TransientExpression><![CDATA[adf.context.sessionScope.orgId]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="p_receiptno"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <SQLQuery>
+    <![CDATA[SELECT distinct D.INVOICE_NO invoice_number,
+                rsh.receipt_num receipt_number,
+                (select ap.VENDOR_NAME
+                   from ap_suppliers ap
+                  where ap.VENDOR_ID = rt.VENDOR_ID) supplier,
+                mnj_mfg_shrink_getGRN_dates(rt.SHIPMENT_HEADER_ID) grn_date,'INVOICE' INVOICE_GRN
+ from      rcv_shipment_headers rsh,
+       RCV_TRANSACTIONS     rt,
+       org_organization_definitions ood,
+       IEDOC_IMP_BBLC_HEADERS h,
+       IEDOC_IMP_BBLC_LINES l ,
+       IEDOC_IMP_BBLC_DETAILS d
+ WHERE 
+    rsh.SHIPMENT_HEADER_ID(+) = rt.SHIPMENT_HEADER_ID
+   and ood.organization_id = rsh.SHIP_TO_ORG_ID
+   and H.IMP_BBLC_HEADER_ID = L.IMP_BBLC_HEADER_ID
+   and D.IMP_BBLC_LINE_ID = L.IMP_BBLC_LINE_ID
+   and D.SHIPMENT_NUMBER = trunc(regexp_replace(rsh.shipment_num, '[A-Za-z]'))
+   and  ood.OPERATING_UNIT=:p_org_id
+UNION ALL
+SELECT distinct rsh.receipt_num invoice_number,
+                rsh.receipt_num receipt_number,
+                (select ap.VENDOR_NAME
+                   from ap_suppliers ap
+                  where ap.VENDOR_ID = rt.VENDOR_ID) supplier,
+                mnj_mfg_shrink_getGRN_dates(rt.SHIPMENT_HEADER_ID) grn_date,'GRN No' INVOICE_GRN
+ from      
+       rcv_shipment_headers rsh,
+       RCV_SHIPMENT_LINES   RSL,
+       MTL_SYSTEM_ITEMS     MSI,
+       RCV_TRANSACTIONS     rt,
+       org_organization_definitions ood
+ WHERE 
+    rsh.SHIPMENT_HEADER_ID(+) = rt.SHIPMENT_HEADER_ID
+   AND RSH.SHIPMENT_HEADER_ID = RSL.SHIPMENT_HEADER_ID 
+   AND RSL.ITEM_ID            = MSI.INVENTORY_ITEM_ID
+   AND MSI.ORGANIZATION_ID    = 353
+   --AND MSI.SEGMENT3           = '01'
+   AND MSI.SEGMENT1           IN ('11','12')
+   and ood.organization_id = rsh.SHIP_TO_ORG_ID
+   and  ood.OPERATING_UNIT=:p_org_id]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="InvoiceNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INVOICE_NUMBER"
+    Expression="INVOICE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReceiptNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RECEIPT_NUMBER"
+    Expression="RECEIPT_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Supplier"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SUPPLIER"
+    Expression="SUPPLIER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="15"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GrnDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GRN_DATE"
+    Expression="GRN_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InvoiceGrn"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="7"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INVOICE_GRN"
+    Expression="INVOICE_GRN"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="ReceiptNoCriteria"
+    ViewObjectName="mnj.mfg.model.lovviews.ReceiptNo"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

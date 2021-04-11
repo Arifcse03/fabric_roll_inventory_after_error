@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjMfgFebdetailsFkAssoc"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="FebricOunceLine"
+    Cardinality="1"
+    Source="true"
+    Owner="mnj.mfg.model.entities.FebricOunceLine">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="FebricOunceLine"/>
+      <Attr Name="_foreignKey"
+        Value="mnj.mfg.model.entities.FebricOunceLine.MnjMfgFeblinPk"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.FebricOunceLine.LineId"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="FebricOunceDetail"
+    Cardinality="-1"
+    Owner="mnj.mfg.model.entities.FebricOunceDetail">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="FebricOunceDetail"/>
+      <Attr Name="_foreignKey"
+        Value="mnj.mfg.model.entities.FebricOunceDetail.MnjMfgFebdetailsFk"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.FebricOunceDetail.LineId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

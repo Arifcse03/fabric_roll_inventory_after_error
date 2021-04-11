@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjMfgFabinsSecndDView"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  SelectList="MnjMfgFabinsSecndD.DETAIL_ID, 
+       MnjMfgFabinsSecndD.LINE_ID, 
+       MnjMfgFabinsSecndD.ROLL_NO, 
+       MnjMfgFabinsSecndD.ACTUAL_LENGTH, 
+       MnjMfgFabinsSecndD.CUT_WIDTH, 
+       MnjMfgFabinsSecndD.TOT_PEN_POINTS, 
+       MnjMfgFabinsSecndD.TOT_POINTS, 
+       MnjMfgFabinsSecndD.SHADE_VAR, 
+       MnjMfgFabinsSecndD.BOWING, 
+       MnjMfgFabinsSecndD.SKEWING, 
+       MnjMfgFabinsSecndD.ROL_ACPT_REJ, 
+       MnjMfgFabinsSecndD.REMARKS, 
+       MnjMfgFabinsSecndD.HEADER_ID, 
+       MnjMfgFabinsSecndD.PROD_L_ID, 
+       MnjMfgFabinsSecndD.ACTUAL_LENGTH_INCH, 
+       MnjMfgFabinsSecndD.SUPPLIER_ROLL_NO"
+  FromList="MNJ_MFG_FABINS_SECND_D MnjMfgFabinsSecndD"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="YesNo1"
+    ViewObjectName="mnj.mfg.model.lovviews.YesNo"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="RollAcceptRejectVO1"
+    ViewObjectName="mnj.mfg.model.lovviews.RollAcceptRejectVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_ShadeVar"
+    ListVOName="YesNo1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ShadeVar"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Val"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Val"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Bowing"
+    ListVOName="YesNo1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Bowing"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Val"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Val"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Skewing"
+    ListVOName="YesNo1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Skewing"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Val"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Val"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RolAcptRej"
+    ListVOName="RollAcceptRejectVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RolAcptRej"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Val"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Val"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="MnjMfgFabinsSecndD"
+    Entity="mnj.mfg.model.entities.MnjMfgFabinsSecndD"/>
+  <ViewAttribute
+    Name="DetailId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DetailId"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="DETAIL_ID"/>
+  <ViewAttribute
+    Name="LineId"
+    PrecisionRule="true"
+    EntityAttrName="LineId"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="LINE_ID"/>
+  <ViewAttribute
+    Name="RollNo"
+    PrecisionRule="true"
+    EntityAttrName="RollNo"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="ROLL_NO"/>
+  <ViewAttribute
+    Name="ActualLength"
+    PrecisionRule="true"
+    EntityAttrName="ActualLength"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="ACTUAL_LENGTH"/>
+  <ViewAttribute
+    Name="CutWidth"
+    PrecisionRule="true"
+    EntityAttrName="CutWidth"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="CUT_WIDTH"/>
+  <ViewAttribute
+    Name="TotPenPoints"
+    PrecisionRule="true"
+    EntityAttrName="TotPenPoints"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="TOT_PEN_POINTS"/>
+  <ViewAttribute
+    Name="TotPoints"
+    PrecisionRule="true"
+    EntityAttrName="TotPoints"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="TOT_POINTS"/>
+  <ViewAttribute
+    Name="ShadeVar"
+    PrecisionRule="true"
+    EntityAttrName="ShadeVar"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="SHADE_VAR"
+    LOVName="LOV_ShadeVar"
+    DefaultValue="No">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Bowing"
+    PrecisionRule="true"
+    EntityAttrName="Bowing"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="BOWING"
+    LOVName="LOV_Bowing"
+    DefaultValue="No">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Skewing"
+    PrecisionRule="true"
+    EntityAttrName="Skewing"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="SKEWING"
+    LOVName="LOV_Skewing"
+    DefaultValue="No">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RolAcptRej"
+    PrecisionRule="true"
+    EntityAttrName="RolAcptRej"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="ROL_ACPT_REJ"
+    LOVName="LOV_RolAcptRej"
+    DefaultValue="Accept">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Remarks"
+    PrecisionRule="true"
+    EntityAttrName="Remarks"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="REMARKS"/>
+  <ViewAttribute
+    Name="HeaderId"
+    PrecisionRule="true"
+    EntityAttrName="HeaderId"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="HEADER_ID"/>
+  <ViewAttribute
+    Name="ProdLId"
+    PrecisionRule="true"
+    EntityAttrName="ProdLId"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="PROD_L_ID"/>
+  <ViewAttribute
+    Name="ActualLengthInch"
+    PrecisionRule="true"
+    EntityAttrName="ActualLengthInch"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="ACTUAL_LENGTH_INCH"/>
+  <ViewAttribute
+    Name="SupplierRollNo"
+    PrecisionRule="true"
+    EntityAttrName="SupplierRollNo"
+    EntityUsage="MnjMfgFabinsSecndD"
+    AliasName="SUPPLIER_ROLL_NO"/>
+  <ViewLinkAccessor
+    Name="MnjMfgFabinsSecndD2View"
+    ViewLink="mnj.mfg.model.views.viewlinks.MnjMfgFabinsSecndD2Fk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

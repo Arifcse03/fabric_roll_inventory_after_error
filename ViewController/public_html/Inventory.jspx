@@ -1,0 +1,1127 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1" usesUpload="true" binding="#{MyBean.inventoryForm}">
+        <af:panelHeader text="Fabric Roll Inventory" id="ph2"
+                        inlineStyle="height:573px;">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:panelHeader text="Header" id="ph1" inlineStyle="width:1269px;">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelFormLayout id="pfl1" rows="2" maxColumns="5">
+              <af:inputText value="#{bindings.HeaderNo.inputValue}"
+                            label="Doc No."
+                            required="#{bindings.HeaderNo.hints.mandatory}"
+                            columns="#{bindings.HeaderNo.hints.displayWidth}"
+                            maximumLength="#{bindings.HeaderNo.hints.precision}"
+                            shortDesc="#{bindings.HeaderNo.hints.tooltip}"
+                            id="it4" readOnly="true">
+                <f:validator binding="#{bindings.HeaderNo.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.HeaderNo.format}"/>
+              </af:inputText>
+              <af:selectOneChoice value="#{bindings.UnitName.inputValue}"
+                                  label="#{bindings.UnitName.label}"
+                                  required="#{bindings.UnitName.hints.mandatory}"
+                                  shortDesc="#{bindings.UnitName.hints.tooltip}"
+                                  id="soc1"
+                                  readOnly="#{bindings.UnitName.inputValue eq null ? 'false' : 'true'}"
+                                  autoSubmit="true">
+                <f:selectItems value="#{bindings.UnitName.items}" id="si1"/>
+              </af:selectOneChoice>
+              <af:inputText value="#{bindings.InvoiceNo.inputValue}"
+                            label="Invoice No / GRN No."
+                            columns="#{bindings.InvoiceNo.hints.displayWidth}"
+                            maximumLength="#{bindings.InvoiceNo.hints.precision}"
+                            shortDesc="#{bindings.InvoiceNo.hints.tooltip}"
+                            id="it24" required="true"
+                            readOnly="#{bindings.InvoiceNo.inputValue eq null ? 'false' :'true'}">
+                <f:validator binding="#{bindings.InvoiceNo.validator}"/>
+              </af:inputText>
+              <af:inputDate value="#{bindings.UpdateOn.inputValue}"
+                            label="Update On"
+                            required="#{bindings.UpdateOn.hints.mandatory}"
+                            shortDesc="#{bindings.UpdateOn.hints.tooltip}"
+                            id="id1" readOnly="false">
+                <f:validator binding="#{bindings.UpdateOn.validator}"/>
+                <af:convertDateTime pattern="#{bindings.UpdateOn.format}"/>
+              </af:inputDate>
+              <af:inputText value="#{bindings.VendorName.inputValue}"
+                            label="Supplier Name"
+                            required="#{bindings.VendorName.hints.mandatory}"
+                            columns="#{bindings.VendorName.hints.displayWidth}"
+                            maximumLength="#{bindings.VendorName.hints.precision}"
+                            shortDesc="#{bindings.VendorName.hints.tooltip}"
+                            id="it20"
+                            readOnly="true">
+                <f:validator binding="#{bindings.VendorName.validator}"/>
+              </af:inputText>
+              <af:inputListOfValues id="rollTransferOrganizationId"
+                                    popupTitle="Search and Select: #{bindings.RollTransferOrganization.hints.label}"
+                                    value="#{bindings.RollTransferOrganization.inputValue}"
+                                    label="Roll Transfer Organization"
+                                    model="#{bindings.RollTransferOrganization.listOfValuesModel}"
+                                    required="#{bindings.RollTransferOrganization.hints.mandatory}"
+                                    columns="#{bindings.RollTransferOrganization.hints.displayWidth}"
+                                    shortDesc="#{bindings.RollTransferOrganization.hints.tooltip}"
+                                    autoSubmit="true"
+                                    readOnly="#{bindings.RollTransferOrganization.inputValue eq null ? 'false' :'true'}">
+                <f:validator binding="#{bindings.RollTransferOrganization.validator}"/>
+              </af:inputListOfValues>
+              <af:inputComboboxListOfValues id="receiveNoId"
+                                            popupTitle="Search and Select: #{bindings.ReceiveNo.hints.label}"
+                                            value="#{bindings.ReceiveNo.inputValue}"
+                                            label="Receipt No"
+                                            model="#{bindings.ReceiveNo.listOfValuesModel}"
+                                            required="#{bindings.ReceiveNo.hints.mandatory}"
+                                            columns="#{bindings.ReceiveNo.hints.displayWidth}"
+                                            shortDesc="#{bindings.ReceiveNo.hints.tooltip}"
+                                            readOnly="true" autoSubmit="true"
+                                            partialTriggers="invoiceNoId"
+                                            visible="false">
+                <f:validator binding="#{bindings.ReceiveNo.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.ReceiveNo.suggestedItems}"/>
+              </af:inputComboboxListOfValues>
+              <af:panelLabelAndMessage
+                                       id="plam1" partialTriggers="invoiceNoId"
+                                       visible="false">
+                <af:outputText value="#{bindings.GrnOrInvoice.inputValue}"
+                               id="ot1"/>
+              </af:panelLabelAndMessage>
+              <af:inputText value="#{bindings.GrnDates.inputValue}"
+                            label="GRN Date"
+                            required="#{bindings.GrnDates.hints.mandatory}"
+                            columns="#{bindings.GrnDates.hints.displayWidth}"
+                            maximumLength="#{bindings.GrnDates.hints.precision}"
+                            shortDesc="#{bindings.GrnDates.hints.tooltip}"
+                            id="it21" readOnly="true"
+                            partialTriggers="invoiceNoId" visible="false">
+                <f:validator binding="#{bindings.GrnDates.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.BuyerId.inputValue}"
+                            label="#{bindings.BuyerId.hints.label}"
+                            required="#{bindings.BuyerId.hints.mandatory}"
+                            columns="#{bindings.BuyerId.hints.displayWidth}"
+                            maximumLength="#{bindings.BuyerId.hints.precision}"
+                            shortDesc="#{bindings.BuyerId.hints.tooltip}"
+                            id="it7" partialTriggers="buyerNameId"
+                            visible="false">
+                <f:validator binding="#{bindings.BuyerId.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BuyerId.format}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.OrgId.inputValue}"
+                            label="#{bindings.OrgId.hints.label}"
+                            required="#{bindings.OrgId.hints.mandatory}"
+                            columns="#{bindings.OrgId.hints.displayWidth}"
+                            maximumLength="#{bindings.OrgId.hints.precision}"
+                            shortDesc="#{bindings.OrgId.hints.tooltip}"
+                            id="it8"
+                            visible="false" partialTriggers="soc1">
+                <f:validator binding="#{bindings.OrgId.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.OrgId.format}"/>
+              </af:inputText>
+              <f:facet name="footer">
+                <af:group id="g1">
+                  <af:panelGroupLayout layout="horizontal" id="pgl1">
+                    <af:commandButton actionListener="#{bindings.First.execute}"
+                                      text="First"
+                                      disabled="#{!bindings.First.enabled}"
+                                      partialSubmit="true" id="cb2"
+                                      inlineStyle="height:25px;"/>
+                    <af:commandButton actionListener="#{bindings.Previous.execute}"
+                                      text="Previous"
+                                      disabled="#{!bindings.Previous.enabled}"
+                                      partialSubmit="true" id="cb1"
+                                      inlineStyle="height:25px;"/>
+                    <af:commandButton actionListener="#{bindings.Next.execute}"
+                                      text="Next"
+                                      disabled="#{!bindings.Next.enabled}"
+                                      partialSubmit="true" id="cb4"
+                                      inlineStyle="height:25px;"/>
+                    <af:commandButton actionListener="#{bindings.Last.execute}"
+                                      text="Last"
+                                      disabled="#{!bindings.Last.enabled}"
+                                      partialSubmit="true" id="cb3"
+                                      inlineStyle="height:25px;"/>
+                    <af:commandButton text="Save" id="cb5"
+                                      action="#{MyBean.SaveAll}"
+                                      inlineStyle="height:25px;"/>
+                    <af:commandButton actionListener="#{bindings.Rollback.execute}"
+                                      text="Back" immediate="true" id="cb6"
+                                      action="goQuery"
+                                      inlineStyle="height:25px;">
+                      <af:resetActionListener/>
+                    </af:commandButton>
+                    <af:commandButton text="Partial Transfer Rolls" id="cb13"
+                                      actionListener="#{MyBean.TransferRolls}"
+                                      inlineStyle="height:25px;"/>
+                    <af:commandButton text="Full Transfer Rolls"
+                                      id="commandButton1"
+                                      actionListener="#{MyBean.FullTransferRolls}"
+                                      action="goQuery"
+                                      inlineStyle="height:25px;"/>
+                  </af:panelGroupLayout>
+                </af:group>
+              </f:facet>
+              <af:inputText value="#{bindings.RollTransferOrg.inputValue}"
+                            label="#{bindings.RollTransferOrg.hints.label}"
+                            required="#{bindings.RollTransferOrg.hints.mandatory}"
+                            columns="#{bindings.RollTransferOrg.hints.displayWidth}"
+                            maximumLength="#{bindings.RollTransferOrg.hints.precision}"
+                            shortDesc="#{bindings.RollTransferOrg.hints.tooltip}"
+                            id="it23"
+                            partialTriggers="rollTransferOrganizationId"
+                            visible="false">
+                <f:validator binding="#{bindings.RollTransferOrg.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.RollTransferOrg.format}"/>
+              </af:inputText>
+              <af:selectBooleanCheckbox value="#{bindings.TransferDoc.inputValue}"
+                                        label="Transfer Document Flag"
+                                        shortDesc="#{bindings.TransferDoc.hints.tooltip}"
+                                        id="sbc2"/>
+            </af:panelFormLayout>
+          </af:panelHeader>
+          <af:table value="#{bindings.InvoiceWiseSupplierLOV1.collectionModel}"
+                    var="row"
+                    rows="#{bindings.InvoiceWiseSupplierLOV1.rangeSize}"
+                    emptyText="#{bindings.InvoiceWiseSupplierLOV1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.InvoiceWiseSupplierLOV1.rangeSize}"
+                    rowBandingInterval="0"
+                    filterModel="#{bindings.InvoiceWiseSupplierLOV1Query.queryDescriptor}"
+                    queryListener="#{bindings.InvoiceWiseSupplierLOV1Query.processQuery}"
+                    filterVisible="true" varStatus="vs"
+                    selectedRowKeys="#{bindings.InvoiceWiseSupplierLOV1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.InvoiceWiseSupplierLOV1.collectionModel.makeCurrent}"
+                    rowSelection="single" id="t10" width="100%" visible="false">
+            <af:column sortProperty="SupplierName" filterable="true"
+                       sortable="true"
+                       headerText="#{bindings.InvoiceWiseSupplierLOV1.hints.SupplierName.label}"
+                       id="c78" width="200">
+              <af:outputText value="#{row.SupplierName}" id="ot46"/>
+            </af:column>
+            <af:column sortProperty="SupplierId" filterable="true"
+                       sortable="true"
+                       headerText="#{bindings.InvoiceWiseSupplierLOV1.hints.SupplierId.label}"
+                       id="c62">
+              <af:outputText value="#{row.SupplierId}" id="ot36">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.InvoiceWiseSupplierLOV1.hints.SupplierId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="InvoiceNo" filterable="true"
+                       sortable="true"
+                       headerText="#{bindings.InvoiceWiseSupplierLOV1.hints.InvoiceNo.label}"
+                       id="c60" width="150">
+              <af:outputText value="#{row.InvoiceNo}" id="ot49"/>
+            </af:column>
+          </af:table>
+          <af:panelHeader text="Lines" id="ph3">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <af:panelGroupLayout id="pgl2" layout="horizontal">
+              <af:panelCollection id="pc1" inlineStyle="width:768px;">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar">
+                  <af:toolbar id="t1">
+                    <af:commandButton actionListener="#{bindings.CreateInsert.execute}"
+                                      text="Create"
+                                      disabled="#{!bindings.CreateInsert.enabled}"
+                                      id="cb7" inlineStyle="height:25px;"/>
+                    <af:commandButton actionListener="#{bindings.Delete.execute}"
+                                      text="Delete"
+                                      disabled="#{!bindings.Delete.enabled}"
+                                      id="cb8" inlineStyle="height:25px;"/>
+                    <af:commandButton text="Fill PI" id="cb16"
+                                      inlineStyle="height:25px;">
+                      <af:showPopupBehavior popupId="::p1" alignId="::f1"/>
+                    </af:commandButton>
+                    <af:spacer width="10" height="10" id="s1"/>
+                  </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.InvPageLinesVO1.collectionModel}"
+                          var="row" rows="#{bindings.InvPageLinesVO1.rangeSize}"
+                          emptyText="#{bindings.InvPageLinesVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.InvPageLinesVO1.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.InvPageLinesVO1Query.queryDescriptor}"
+                          queryListener="#{bindings.InvPageLinesVO1Query.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.InvPageLinesVO1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.InvPageLinesVO1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t3"
+                          partialTriggers="::cb7 ::cb8"
+                          binding="#{MyBean.invLinesTable}" autoHeightRows="0">
+                  <af:column headerText="#{bindings.InvPageLinesVO1.hints.HeaderId.label}"
+                             id="c56" width="50" visible="false">
+                    <af:inputText value="#{row.bindings.HeaderId.inputValue}"
+                                  label="#{bindings.InvPageLinesVO1.hints.HeaderId.label}"
+                                  required="#{bindings.InvPageLinesVO1.hints.HeaderId.mandatory}"
+                                  columns="#{bindings.InvPageLinesVO1.hints.HeaderId.displayWidth}"
+                                  maximumLength="#{bindings.InvPageLinesVO1.hints.HeaderId.precision}"
+                                  shortDesc="#{bindings.InvPageLinesVO1.hints.HeaderId.tooltip}"
+                                  id="it25">
+                      <f:validator binding="#{row.bindings.HeaderId.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.InvPageLinesVO1.hints.HeaderId.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column headerText="#{bindings.InvPageLinesVO1.hints.LineId.label}"
+                             id="c57" width="50" visible="false">
+                    <af:inputText value="#{row.bindings.LineId.inputValue}"
+                                  label="#{bindings.InvPageLinesVO1.hints.LineId.label}"
+                                  required="#{bindings.InvPageLinesVO1.hints.LineId.mandatory}"
+                                  columns="#{bindings.InvPageLinesVO1.hints.LineId.displayWidth}"
+                                  maximumLength="#{bindings.InvPageLinesVO1.hints.LineId.precision}"
+                                  shortDesc="#{bindings.InvPageLinesVO1.hints.LineId.tooltip}"
+                                  id="it26">
+                      <f:validator binding="#{row.bindings.LineId.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.InvPageLinesVO1.hints.LineId.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column headerText="Raw Material Color"
+                             id="c9" sortable="true" filterable="true"
+                             sortProperty="Color" align="center" width="120">
+                    <af:inputListOfValues id="colorId"
+                                          popupTitle="Search and Select: #{bindings.InvPageLinesVO1.hints.Color.label}"
+                                          value="#{row.bindings.Color.inputValue}"
+                                          model="#{row.bindings.Color.listOfValuesModel}"
+                                          required="#{bindings.InvPageLinesVO1.hints.Color.mandatory}"
+                                          columns="#{bindings.InvPageLinesVO1.hints.Color.displayWidth}"
+                                          shortDesc="#{bindings.InvPageLinesVO1.hints.Color.tooltip}"
+                                          readOnly="true">
+                      <f:validator binding="#{row.bindings.Color.validator}"/>
+                    </af:inputListOfValues>
+                  </af:column>
+                  <af:column sortProperty="TotalRolls" filterable="true"
+                             sortable="true" headerText="Total Rolls" id="c10"
+                             align="center" width="50">
+                    <af:inputText value="#{row.bindings.TotalRolls.inputValue}"
+                                  label="#{bindings.InvPageLinesVO1.hints.TotalRolls.label}"
+                                  required="#{bindings.InvPageLinesVO1.hints.TotalRolls.mandatory}"
+                                  columns="#{bindings.InvPageLinesVO1.hints.TotalRolls.displayWidth}"
+                                  maximumLength="#{bindings.InvPageLinesVO1.hints.TotalRolls.precision}"
+                                  shortDesc="#{bindings.InvPageLinesVO1.hints.TotalRolls.tooltip}"
+                                  id="it2" readOnly="true">
+                      <f:validator binding="#{row.bindings.TotalRolls.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.InvPageLinesVO1.hints.TotalRolls.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="TotalYards" filterable="true"
+                             sortable="true" headerText="Total Yards" id="c8"
+                             align="center" width="50">
+                    <af:inputText value="#{row.bindings.TotalYards.inputValue}"
+                                  label="#{bindings.InvPageLinesVO1.hints.TotalYards.label}"
+                                  required="#{bindings.InvPageLinesVO1.hints.TotalYards.mandatory}"
+                                  columns="#{bindings.InvPageLinesVO1.hints.TotalYards.displayWidth}"
+                                  maximumLength="#{bindings.InvPageLinesVO1.hints.TotalYards.precision}"
+                                  shortDesc="#{bindings.InvPageLinesVO1.hints.TotalYards.tooltip}"
+                                  id="it6" readOnly="true">
+                      <f:validator binding="#{row.bindings.TotalYards.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.InvPageLinesVO1.hints.TotalYards.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column headerText="Article No"
+                             id="c80" align="center" sortable="true"
+                             filterable="true" sortProperty="ArticleNo">
+                    <af:outputText value="#{row.ArticleNo}" id="ot50"/>
+                  </af:column>
+                  <af:column headerText="Fabric Construction"
+                             id="c25" align="center" sortProperty="FabConst"
+                             sortable="true" filterable="true" width="140">
+                    <af:outputText value="#{row.FabConst}" id="ot2"/>
+                  </af:column>
+                  <af:column headerText="Fabric Composition"
+                             id="c26" align="center" sortProperty="FabComp"
+                             sortable="true" filterable="true" width="160">
+                    <af:outputText value="#{row.FabComp}" id="ot4"/>
+                  </af:column>
+                  <af:column headerText="Fabric Ounce"
+                             id="c28" align="center" sortProperty="FabOunce"
+                             sortable="true" filterable="true" width="60">
+                    <af:outputText value="#{row.FabOunce}" id="ot6"/>
+                  </af:column>
+                  <af:column headerText="Style Season"
+                             id="c58" align="center" sortable="true"
+                             filterable="true" sortProperty="StyleSeason"
+                             width="145">
+                    <af:outputText value="#{row.StyleSeason}" id="ot32"/>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+              <af:spacer width="30" height="10" id="s2"/>
+              <af:panelCollection id="pc2" inlineStyle="width:492.0px;">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar">
+                  <af:toolbar id="t2">
+                    <af:commandButton actionListener="#{bindings.CreateInsert1.execute}"
+                                      text="Create"
+                                      disabled="#{!bindings.CreateInsert1.enabled}"
+                                      id="cb9" partialSubmit="true"
+                                      inlineStyle="height:25px;"/>
+                    <af:commandButton text="SAVE" id="cb21"
+                                      partialSubmit="true"
+                                      actionListener="#{MyBean.CusToMsave}"/>
+                    <af:commandButton actionListener="#{bindings.Delete1.execute}"
+                                      text="Delete"
+                                      disabled="#{!bindings.Delete1.enabled}"
+                                      id="cb10" partialSubmit="true"
+                                      inlineStyle="height:25px;"/>
+                  </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.InvPageDetailsVO1.collectionModel}"
+                          var="row"
+                          rows="#{bindings.InvPageDetailsVO1.rangeSize}"
+                          emptyText="#{bindings.InvPageDetailsVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.InvPageDetailsVO1.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.InvPageDetailsVO1Query.queryDescriptor}"
+                          queryListener="#{bindings.InvPageDetailsVO1Query.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.InvPageDetailsVO1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.InvPageDetailsVO1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t4"
+                          partialTriggers="::cb9 ::cb10"
+                          editingMode="clickToEdit">
+                  <af:column sortProperty="PocId" filterable="true"
+                             sortable="true"
+                             headerText="POC ID"
+                             id="c23" width="130" align="center">
+                    <af:inputListOfValues id="pocIdId"
+                                          popupTitle="Search and Select: #{bindings.InvPageDetailsVO1.hints.PocId.label}"
+                                          value="#{row.bindings.PocId.inputValue}"
+                                          model="#{row.bindings.PocId.listOfValuesModel}"
+                                          required="#{bindings.InvPageDetailsVO1.hints.PocId.mandatory}"
+                                          columns="#{bindings.InvPageDetailsVO1.hints.PocId.displayWidth}"
+                                          shortDesc="#{bindings.InvPageDetailsVO1.hints.PocId.tooltip}">
+                      <f:validator binding="#{row.bindings.PocId.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.InvPageDetailsVO1.hints.PocId.format}"/>
+                    </af:inputListOfValues>
+                  </af:column>
+                  <af:column sortProperty="BuyerName" filterable="true"
+                             sortable="true"
+                             headerText="Buyer Name"
+                             id="c13" width="130" align="center">
+                    <af:outputText value="#{row.BuyerName}" id="ot52"/>
+                  </af:column>
+                  <af:column sortProperty="Season" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.InvPageDetailsVO1.hints.Season.label}"
+                             id="c12" align="center">
+                    <af:outputText value="#{row.Season}" id="ot53"/>
+                  </af:column>
+                  <af:column sortProperty="Style" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.InvPageDetailsVO1.hints.Style.label}"
+                             id="c14" align="center">
+                    <af:outputText value="#{row.Style}" id="ot54"/>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:panelGroupLayout>
+            <af:panelCollection id="pc3" styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu text="Export" id="m2">
+                  <af:commandMenuItem text="Export to Excel" id="cmi1">
+                    <af:exportCollectionActionListener exportedId="t5"
+                                                       type="excelHTML"
+                                                       filename="Roll inventory.xls"
+                                                       title="Roll inventory"/>
+                  </af:commandMenuItem>
+                  <af:commandMenuItem text="Export format" id="cmi2">
+                    <af:fileDownloadActionListener contentType="text/csv"
+                                                   filename="Roll inventory upload.csv"
+                                                   method="#{MyBean.exportToCSV}"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="t6">
+                  <af:commandButton text="Create"
+                                    disabled="#{!bindings.CreateInsert2.enabled}"
+                                    id="cb11"
+                                    actionListener="#{bindings.CreateInsert2.execute}"
+                                    partialSubmit="true"
+                                    inlineStyle="height:25px;"/>
+                  <af:commandButton text="Delete"
+                                    disabled="#{!bindings.Delete2.enabled}"
+                                    id="cb12"
+                                    actionListener="#{MyBean.DeleteAll}"
+                                    partialSubmit="true"
+                                    inlineStyle="height:25px;"/>
+                  <af:inputFile label="Upload Rolls" id="if1"
+                                valueChangeListener="#{MyBean.fileUploadRoll}"
+                                autoSubmit="true" binding="#{MyBean.uploadFile}"
+                                visible="false"/>
+                  <af:commandButton text="Select All" id="cb14"
+                                    actionListener="#{MyBean.selectAllButtonAction}"
+                                    partialSubmit="true"
+                                    inlineStyle="height:25px;"/>
+                  <af:commandButton text="De-Select All" id="cb15"
+                                    actionListener="#{MyBean.deselectAllButtonAction}"
+                                    partialSubmit="true"
+                                    inlineStyle="height:25px;"/>
+                  <af:commandButton text="Fill Roll" id="cb17"
+                                    inlineStyle="height:25px;">
+                    <af:showPopupBehavior popupId="::p2" alignId="::f1"/>
+                  </af:commandButton>
+                  <af:inputFile id="if2"
+                                valueChangeListener="#{MyBean.importRoll}"
+                                autoSubmit="true"
+                                binding="#{MyBean.uploadFabricRollFile}"/>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.InvPageLinesDet2VO1.collectionModel}"
+                        var="row"
+                        rows="#{bindings.InvPageLinesDet2VO1.rangeSize}"
+                        emptyText="#{bindings.InvPageLinesDet2VO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.InvPageLinesDet2VO1.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.InvPageLinesDet2VO1Query.queryDescriptor}"
+                        queryListener="#{bindings.InvPageLinesDet2VO1Query.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.InvPageLinesDet2VO1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.InvPageLinesDet2VO1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t5" width="100%"
+                        partialTriggers="::cb11 ::cb12" immediate="true"
+                        editingMode="clickToEdit" contentDelivery="immediate"
+                        binding="#{MyBean.rollTable}">
+                <af:column headerText="Check Box" id="c29" align="center"
+                           width="30">
+                  <af:selectBooleanCheckbox value="#{row.bindings.TransferSelection.inputValue}"
+                                            label="#{row.bindings.TransferSelection.label}"
+                                            shortDesc="#{bindings.InvPageLinesDet2VO1.hints.TransferSelection.tooltip}"
+                                            id="sbc1" autoSubmit="true"/>
+                </af:column>
+                <af:column headerText="Supplier Serial No." id="c27"
+                           align="center" width="61" sortable="true"
+                           filterable="true" sortProperty="SupplierSerialNo">
+                  <af:outputText value="#{row.SupplierSerialNo}" id="ot5"/>
+                </af:column>
+                <af:column sortProperty="RollNo" filterable="true"
+                           sortable="true" headerText="Supplier Roll No" id="c6"
+                           width="110" align="center">
+                  <af:inputText value="#{row.bindings.RollNo.inputValue}"
+                                label="#{bindings.InvPageLinesDet2VO1.hints.RollNo.label}"
+                                required="#{bindings.InvPageLinesDet2VO1.hints.RollNo.mandatory}"
+                                columns="#{bindings.InvPageLinesDet2VO1.hints.RollNo.displayWidth}"
+                                maximumLength="#{bindings.InvPageLinesDet2VO1.hints.RollNo.precision}"
+                                shortDesc="#{bindings.InvPageLinesDet2VO1.hints.RollNo.tooltip}"
+                                id="it14" partialTriggers="it19 shadeId">
+                    <f:validator binding="#{row.bindings.RollNo.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column headerText="Factory Roll No" id="c15" align="center"
+                           width="109">
+                  <af:inputText value="#{row.bindings.RollSrNo.inputValue}"
+                                label="#{bindings.InvPageLinesDet2VO1.hints.RollSrNo.label}"
+                                required="#{bindings.InvPageLinesDet2VO1.hints.RollSrNo.mandatory}"
+                                columns="#{bindings.InvPageLinesDet2VO1.hints.RollSrNo.displayWidth}"
+                                maximumLength="#{bindings.InvPageLinesDet2VO1.hints.RollSrNo.precision}"
+                                shortDesc="#{bindings.InvPageLinesDet2VO1.hints.RollSrNo.tooltip}"
+                                id="it3"
+                                partialTriggers="it19 it5 uomId it12 it17">
+                    <f:validator binding="#{row.bindings.RollSrNo.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="c18" headerText="Roll Length" align="center"
+                           width="110">
+                  <af:column sortProperty="RollLength" filterable="true"
+                             sortable="true" headerText="Length" id="c3"
+                             width="50" align="center">
+                    <af:inputText value="#{row.bindings.RollLength.inputValue}"
+                                  label="#{bindings.InvPageLinesDet2VO1.hints.RollLength.label}"
+                                  required="#{bindings.InvPageLinesDet2VO1.hints.RollLength.mandatory}"
+                                  columns="#{bindings.InvPageLinesDet2VO1.hints.RollLength.displayWidth}"
+                                  maximumLength="#{bindings.InvPageLinesDet2VO1.hints.RollLength.precision}"
+                                  shortDesc="#{bindings.InvPageLinesDet2VO1.hints.RollLength.tooltip}"
+                                  id="it19" binding="#{MyBean.rolLengthMeter}"
+                                  valueChangeListener="#{MyBean.rollLengthYdsListener}"
+                                  autoSubmit="true"
+                                  partialTriggers="shadeId it5"
+                                  immediate="false">
+                      <f:validator binding="#{row.bindings.RollLength.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.InvPageLinesDet2VO1.hints.RollLength.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column headerText="Inch" id="c16" align="center"
+                             width="50" sortable="true" filterable="true"
+                             sortProperty="RollLength2">
+                    <af:inputText value="#{row.bindings.RollLength2.inputValue}"
+                                  label="#{bindings.InvPageLinesDet2VO1.hints.RollLength2.label}"
+                                  required="#{bindings.InvPageLinesDet2VO1.hints.RollLength2.mandatory}"
+                                  columns="#{bindings.InvPageLinesDet2VO1.hints.RollLength2.displayWidth}"
+                                  maximumLength="#{bindings.InvPageLinesDet2VO1.hints.RollLength2.precision}"
+                                  shortDesc="#{bindings.InvPageLinesDet2VO1.hints.RollLength2.tooltip}"
+                                  id="it5" binding="#{MyBean.rolLengthInch}"
+                                  immediate="false" partialTriggers="it19"
+                                  valueChangeListener="#{MyBean.rollLengthYdsListener}"
+                                  autoSubmit="true">
+                      <f:validator binding="#{row.bindings.RollLength2.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                </af:column>
+                <af:column headerText="#{bindings.InvPageLinesDet2VO1.hints.Uom.label}"
+                           id="c17" align="center" width="66">
+                  <af:inputComboboxListOfValues id="uomId"
+                                                popupTitle="Search and Select: #{bindings.InvPageLinesDet2VO1.hints.Uom.label}"
+                                                value="#{row.bindings.Uom.inputValue}"
+                                                model="#{row.bindings.Uom.listOfValuesModel}"
+                                                required="#{bindings.InvPageLinesDet2VO1.hints.Uom.mandatory}"
+                                                columns="#{bindings.InvPageLinesDet2VO1.hints.Uom.displayWidth}"
+                                                shortDesc="#{bindings.InvPageLinesDet2VO1.hints.Uom.tooltip}"
+                                                binding="#{MyBean.rolUOM2}"
+                                                valueChangeListener="#{MyBean.rolUOMListener}">
+                    <f:validator binding="#{row.bindings.Uom.validator}"/>
+                  </af:inputComboboxListOfValues>
+                </af:column>
+                <af:column id="c21" headerText="Roll Length Yrds" align="center"
+                           width="110">
+                  <af:column headerText="Yrds" id="c19" align="center"
+                             width="50">
+                    <af:inputText value="#{row.bindings.RolLength3.inputValue}"
+                                  label="#{bindings.InvPageLinesDet2VO1.hints.RolLength3.label}"
+                                  required="#{bindings.InvPageLinesDet2VO1.hints.RolLength3.mandatory}"
+                                  columns="#{bindings.InvPageLinesDet2VO1.hints.RolLength3.displayWidth}"
+                                  maximumLength="#{bindings.InvPageLinesDet2VO1.hints.RolLength3.precision}"
+                                  shortDesc="#{bindings.InvPageLinesDet2VO1.hints.RolLength3.tooltip}"
+                                  id="it12" binding="#{MyBean.rolLengthYrdsNew}"
+                                  readOnly="true">
+                      <f:validator binding="#{row.bindings.RolLength3.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.InvPageLinesDet2VO1.hints.RolLength3.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column headerText="Inch" id="c20" width="50"
+                             align="center">
+                    <af:inputText value="#{row.bindings.RolLength4.inputValue}"
+                                  label="#{bindings.InvPageLinesDet2VO1.hints.RolLength4.label}"
+                                  required="#{bindings.InvPageLinesDet2VO1.hints.RolLength4.mandatory}"
+                                  columns="#{bindings.InvPageLinesDet2VO1.hints.RolLength4.displayWidth}"
+                                  maximumLength="#{bindings.InvPageLinesDet2VO1.hints.RolLength4.precision}"
+                                  shortDesc="#{bindings.InvPageLinesDet2VO1.hints.RolLength4.tooltip}"
+                                  id="it17" binding="#{MyBean.rolLengthInchNew}"
+                                  readOnly="true">
+                      <f:validator binding="#{row.bindings.RolLength4.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.InvPageLinesDet2VO1.hints.RolLength4.format}"
+                                        maxFractionDigits="2"/>
+                    </af:inputText>
+                  </af:column>
+                </af:column>
+                <af:column sortProperty="RollWidth" filterable="true"
+                           sortable="true" headerText="Roll Width(Inch)" id="c7"
+                           width="75" align="center">
+                  <af:inputText value="#{row.bindings.RollWidth.inputValue}"
+                                label="#{bindings.InvPageLinesDet2VO1.hints.RollWidth.label}"
+                                required="#{bindings.InvPageLinesDet2VO1.hints.RollWidth.mandatory}"
+                                columns="#{bindings.InvPageLinesDet2VO1.hints.RollWidth.displayWidth}"
+                                maximumLength="#{bindings.InvPageLinesDet2VO1.hints.RollWidth.precision}"
+                                shortDesc="#{bindings.InvPageLinesDet2VO1.hints.RollWidth.tooltip}"
+                                id="it9" partialTriggers="shadeId">
+                    <f:validator binding="#{row.bindings.RollWidth.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InvPageLinesDet2VO1.hints.RollWidth.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="ShrinkLength" filterable="true"
+                           sortable="true" headerText="Shrinkage % (Length)"
+                           id="c4" width="75" align="center">
+                  <af:inputText value="#{row.bindings.ShrinkLength.inputValue}"
+                                label="#{bindings.InvPageLinesDet2VO1.hints.ShrinkLength.label}"
+                                required="#{bindings.InvPageLinesDet2VO1.hints.ShrinkLength.mandatory}"
+                                columns="#{bindings.InvPageLinesDet2VO1.hints.ShrinkLength.displayWidth}"
+                                maximumLength="#{bindings.InvPageLinesDet2VO1.hints.ShrinkLength.precision}"
+                                shortDesc="#{bindings.InvPageLinesDet2VO1.hints.ShrinkLength.tooltip}"
+                                id="it11" partialTriggers="shadeId">
+                    <f:validator binding="#{row.bindings.ShrinkLength.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InvPageLinesDet2VO1.hints.ShrinkLength.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="ShrinkWidth" filterable="true"
+                           sortable="true" headerText="Shrinkage % (Width)"
+                           id="c2" width="75" align="center">
+                  <af:inputText value="#{row.bindings.ShrinkWidth.inputValue}"
+                                label="#{bindings.InvPageLinesDet2VO1.hints.ShrinkWidth.label}"
+                                required="#{bindings.InvPageLinesDet2VO1.hints.ShrinkWidth.mandatory}"
+                                columns="#{bindings.InvPageLinesDet2VO1.hints.ShrinkWidth.displayWidth}"
+                                maximumLength="#{bindings.InvPageLinesDet2VO1.hints.ShrinkWidth.precision}"
+                                shortDesc="#{bindings.InvPageLinesDet2VO1.hints.ShrinkWidth.tooltip}"
+                                id="it10" partialTriggers="shadeId">
+                    <f:validator binding="#{row.bindings.ShrinkWidth.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InvPageLinesDet2VO1.hints.ShrinkWidth.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="Shade" sortable="true"
+                           headerText="Shade" id="c1" width="60" align="center"
+                           filterable="true">
+                  <af:inputComboboxListOfValues id="shadeId"
+                                                popupTitle="Search and Select: #{bindings.InvPageLinesDet2VO1.hints.Shade.label}"
+                                                value="#{row.bindings.Shade.inputValue}"
+                                                model="#{row.bindings.Shade.listOfValuesModel}"
+                                                required="#{bindings.InvPageLinesDet2VO1.hints.Shade.mandatory}"
+                                                columns="#{bindings.InvPageLinesDet2VO1.hints.Shade.displayWidth}"
+                                                shortDesc="#{bindings.InvPageLinesDet2VO1.hints.Shade.tooltip}"
+                                                autoSubmit="true">
+                    <f:validator binding="#{row.bindings.Shade.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{row.bindings.Shade.suggestedItems}"/>
+                  </af:inputComboboxListOfValues>
+                </af:column>
+                <af:column sortProperty="Remarks" filterable="true"
+                           sortable="true" headerText="Remarks" id="c5"
+                           align="center" width="110">
+                  <af:inputText value="#{row.bindings.Remarks.inputValue}"
+                                label="#{bindings.InvPageLinesDet2VO1.hints.Remarks.label}"
+                                required="#{bindings.InvPageLinesDet2VO1.hints.Remarks.mandatory}"
+                                columns="#{bindings.InvPageLinesDet2VO1.hints.Remarks.displayWidth}"
+                                maximumLength="#{bindings.InvPageLinesDet2VO1.hints.Remarks.precision}"
+                                shortDesc="#{bindings.InvPageLinesDet2VO1.hints.Remarks.tooltip}"
+                                id="it13">
+                    <f:validator binding="#{row.bindings.Remarks.validator}"/>
+                  </af:inputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelHeader>
+        </af:panelHeader>
+        <af:popup id="p1" contentDelivery="lazyUncached"
+                  popupFetchListener="#{MyBean.fillPIPopUpEvent}">
+          <af:dialog id="d2"
+                     dialogListener="#{MyBean.fillInvoiceDialogueListener}"
+                     title="Fill PI">
+            <af:panelCollection id="pc4"
+                                inlineStyle="width:1200px; height:380.0px;">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.InvoiceVo1.collectionModel}" var="row"
+                        rows="#{bindings.InvoiceVo1.rangeSize}"
+                        emptyText="#{bindings.InvoiceVo1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.InvoiceVo1.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.InvoiceVo1Query.queryDescriptor}"
+                        queryListener="#{bindings.InvoiceVo1Query.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.InvoiceVo1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.InvoiceVo1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t7">
+                <af:column headerText="Check Box"
+                           id="c55" align="center" width="40" frozen="true">
+                  <af:selectBooleanCheckbox value="#{row.bindings.CheckBox.inputValue}"
+                                            label="#{row.bindings.CheckBox.label}"
+                                            shortDesc="#{bindings.InvoiceVo1.hints.CheckBox.tooltip}"
+                                            id="sbc3" autoSubmit="false"/>
+                </af:column>
+                <af:column sortProperty="InvoiceNumber" filterable="true"
+                           sortable="true"
+                           headerText="Invoice Number"
+                           id="c52" width="150" align="center"
+                           filterFeatures="caseInsensitive">
+                  <af:outputText value="#{row.InvoiceNumber}" id="ot17"/>
+                </af:column>
+                <af:column headerText="PI No."
+                           id="c59" align="center" sortable="true"
+                           filterable="true" sortProperty="PiNo" width="170"
+                           filterFeatures="caseInsensitive">
+                  <af:outputText value="#{row.PiNo}" id="ot33"/>
+                </af:column>
+                <af:column sortProperty="ImpBblcPiDetailId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.InvoiceVo1.hints.ImpBblcPiDetailId.label}"
+                           id="c37" visible="false" align="center">
+                  <af:outputText value="#{row.ImpBblcPiDetailId}" id="ot19">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InvoiceVo1.hints.ImpBblcPiDetailId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="ImpBblcDetailId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.InvoiceVo1.hints.ImpBblcDetailId.label}"
+                           id="c36" visible="false" align="center">
+                  <af:outputText value="#{row.ImpBblcDetailId}" id="ot31">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InvoiceVo1.hints.ImpBblcDetailId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="InvoiceNo" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.InvoiceVo1.hints.InvoiceNo.label}"
+                           id="c40" width="140" visible="false" align="center">
+                  <af:outputText value="#{row.InvoiceNo}" id="ot12"/>
+                </af:column>
+                <af:column sortProperty="InventoryItemId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.InvoiceVo1.hints.InventoryItemId.label}"
+                           id="c46" width="140" visible="false" align="center">
+                  <af:outputText value="#{row.InventoryItemId}" id="ot21"/>
+                </af:column>
+                <af:column sortProperty="Spo" filterable="true" sortable="true"
+                           headerText="SPO"
+                           id="c45" width="80" align="center"
+                           filterFeatures="caseInsensitive">
+                  <af:outputText value="#{row.Spo}" id="ot27"/>
+                </af:column>
+                <af:column sortProperty="ShipNumber" filterable="true"
+                           sortable="true" headerText="Ship Number" id="c51"
+                           width="70" align="center"
+                           filterFeatures="caseInsensitive">
+                  <af:outputText value="#{row.ShipNumber}" id="ot24"/>
+                </af:column>
+                <af:column sortProperty="Supplier" filterable="true"
+                           sortable="true" headerText="Supplier" id="c53"
+                           align="center" width="300"
+                           filterFeatures="caseInsensitive">
+                  <af:outputText value="#{row.Supplier}" id="ot8"/>
+                </af:column>
+                <af:column sortProperty="StyleSeason" filterable="true"
+                           sortable="true"
+                           headerText="Style Season"
+                           id="c44" align="center" width="150"
+                           filterFeatures="caseInsensitive">
+                  <af:outputText value="#{row.StyleSeason}" id="ot14"/>
+                </af:column>
+                <af:column sortProperty="OrgId" filterable="true"
+                           sortable="true"
+                           headerText="Org ID"
+                           id="c47" width="70" align="center">
+                  <af:outputText value="#{row.OrgId}" id="ot29">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InvoiceVo1.hints.OrgId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="ReceiptNum" filterable="true"
+                           sortable="true"
+                           headerText="Receipt Number"
+                           id="c30" width="70" align="center">
+                  <af:outputText value="#{row.ReceiptNum}" id="ot10"/>
+                </af:column>
+                <af:column sortProperty="Color" filterable="true"
+                           sortable="true"
+                           headerText="Color"
+                           id="c34" align="center">
+                  <af:outputText value="#{row.Color}" id="ot15"/>
+                </af:column>
+                <af:column sortProperty="AgentId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.InvoiceVo1.hints.AgentId.label}"
+                           id="c35" visible="false" align="center">
+                  <af:outputText value="#{row.AgentId}" id="ot28">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InvoiceVo1.hints.AgentId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="AgentName" filterable="true"
+                           sortable="true"
+                           headerText="Agent Name"
+                           id="c38" align="center" width="150">
+                  <af:outputText value="#{row.AgentName}" id="ot11"/>
+                </af:column>
+                <af:column sortProperty="Style" filterable="true"
+                           sortable="true"
+                           headerText="Style"
+                           id="c42" align="center" width="150">
+                  <af:outputText value="#{row.Style}" id="ot20"/>
+                </af:column>
+                <af:column sortProperty="Season" filterable="true"
+                           sortable="true"
+                           headerText="Season"
+                           id="c50" align="center" width="150">
+                  <af:outputText value="#{row.Season}" id="ot22"/>
+                </af:column>
+                <af:column sortProperty="VendorId" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.InvoiceVo1.hints.VendorId.label}"
+                           id="c43" visible="false" align="center">
+                  <af:outputText value="#{row.VendorId}" id="ot16">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InvoiceVo1.hints.VendorId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="GrnDate" filterable="true"
+                           sortable="true"
+                           headerText="Grn Date"
+                           id="c49" align="center">
+                  <af:outputText value="#{row.GrnDate}" id="ot7"/>
+                </af:column>
+                <af:column sortProperty="Buyerid" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.InvoiceVo1.hints.Buyerid.label}"
+                           id="c31" visible="false" align="center">
+                  <af:outputText value="#{row.Buyerid}" id="ot26"/>
+                </af:column>
+                <af:column sortProperty="Buyername" filterable="true"
+                           sortable="true"
+                           headerText="Buyer"
+                           id="c33" align="center" width="200">
+                  <af:outputText value="#{row.Buyername}" id="ot13"/>
+                </af:column>
+                <af:column sortProperty="OrganizationName" filterable="true"
+                           sortable="true"
+                           headerText="Organization Name"
+                           id="c48" align="center" width="175">
+                  <af:outputText value="#{row.OrganizationName}" id="ot30"/>
+                </af:column>
+                <af:column headerText="Article No"
+                           id="c81" align="center" sortable="true"
+                           filterable="true" sortProperty="ArticleNo">
+                  <af:outputText value="#{row.ArticleNo}" id="ot51"/>
+                </af:column>
+                <af:column sortProperty="Construction" filterable="true"
+                           sortable="true"
+                           headerText="Construction"
+                           id="c39" align="center" width="200">
+                  <af:outputText value="#{row.Construction}" id="ot23"/>
+                </af:column>
+                <af:column sortProperty="Composition" filterable="true"
+                           sortable="true"
+                           headerText="Composition"
+                           id="c41" align="center" width="200">
+                  <af:outputText value="#{row.Composition}" id="ot25"/>
+                </af:column>
+                <af:column sortProperty="FabOunce" filterable="true"
+                           sortable="true"
+                           headerText="Fab Ounce"
+                           id="c54" width="70" align="center">
+                  <af:outputText value="#{row.FabOunce}" id="ot18"/>
+                </af:column>
+                <af:column sortProperty="PartialPl" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.InvoiceVo1.hints.PartialPl.label}"
+                           id="c32" visible="false" align="center">
+                  <af:outputText value="#{row.PartialPl}" id="ot9"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="p2" contentDelivery="lazyUncached"
+                  popupFetchListener="#{MyBean.editPopUpFetchListenerFillRoll}"
+                  popupCanceledListener="#{MyBean.editPopUpCancelListenerFillRoll}">
+          <af:dialog id="d3" title="Fill Roll"
+                     dialogListener="#{MyBean.editDialogListenerFillRoll}">
+            <af:panelFormLayout id="pfl2" labelAlignment="start">
+              <af:inputListOfValues id="buyerId"
+                                    popupTitle="Search and Select: #{bindings.Buyer.hints.label}"
+                                    value="#{bindings.Buyer.inputValue}"
+                                    label="Buyer"
+                                    model="#{bindings.Buyer.listOfValuesModel}"
+                                    required="#{bindings.Buyer.hints.mandatory}"
+                                    columns="#{bindings.Buyer.hints.displayWidth}"
+                                    shortDesc="#{bindings.Buyer.hints.tooltip}"
+                                    autoSubmit="true"
+                                    contentStyle="width:160px;font-weight:bold;background-color:rgb(234,249,255); ">
+                <f:validator binding="#{bindings.Buyer.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.Buyer.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:inputListOfValues id="inputListOfValues1"
+                                    popupTitle="Search and Select: #{bindings.Style.hints.label}"
+                                    value="#{bindings.Style.inputValue}"
+                                    label="Style"
+                                    model="#{bindings.Style.listOfValuesModel}"
+                                    required="#{bindings.Style.hints.mandatory}"
+                                    columns="#{bindings.Style.hints.displayWidth}"
+                                    shortDesc="#{bindings.Style.hints.tooltip}"
+                                    autoSubmit="true"
+                                    contentStyle="width:160px;font-weight:bold;background-color:rgb(234,249,255); ">
+                <f:validator binding="#{bindings.Style.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.Style.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:inputListOfValues id="season1Id"
+                                    popupTitle="Search and Select: #{bindings.Season1.hints.label}"
+                                    value="#{bindings.Season1.inputValue}"
+                                    label="Season"
+                                    model="#{bindings.Season1.listOfValuesModel}"
+                                    required="#{bindings.Season1.hints.mandatory}"
+                                    columns="#{bindings.Season1.hints.displayWidth}"
+                                    shortDesc="#{bindings.Season1.hints.tooltip}"
+                                    autoSubmit="true"
+                                    contentStyle="width:160px;font-weight:bold;background-color:rgb(234,249,255); ">
+                <f:validator binding="#{bindings.Season1.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.Season1.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:inputListOfValues id="invoiceId"
+                                    popupTitle="Search and Select: #{bindings.Invoice.hints.label}"
+                                    value="#{bindings.Invoice.inputValue}"
+                                    label="Invoice"
+                                    model="#{bindings.Invoice.listOfValuesModel}"
+                                    required="#{bindings.Invoice.hints.mandatory}"
+                                    columns="#{bindings.Invoice.hints.displayWidth}"
+                                    shortDesc="#{bindings.Invoice.hints.tooltip}"
+                                    autoSubmit="true"
+                                    contentStyle="width:160px;font-weight:bold;background-color:rgb(234,249,255); ">
+                <f:validator binding="#{bindings.Invoice.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.Invoice.suggestedItems}"/>
+              </af:inputListOfValues>
+            </af:panelFormLayout>
+            <af:panelCollection id="pc5"
+                                inlineStyle="width:1180px; height:380px;">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t9">
+                  <af:commandButton text="Search" id="cb18"
+                                    inlineStyle="height:25px;"
+                                    action="#{MyBean.filterMethod}"
+                                    partialSubmit="true"
+                                    icon="/icons/search new 2.png"
+                                    iconPosition="leading"/>
+                  <af:commandButton text="Select-All" id="cb20"
+                                    inlineStyle="height:25px;"
+                                    actionListener="#{MyBean.selectAllFillRoll}"
+                                    partialSubmit="true"
+                                    icon="/icons/checked.png"/>
+                  <af:commandButton text="Deselect-All" id="cb19"
+                                    inlineStyle="height:25px;"
+                                    actionListener="#{MyBean.deselectAllFillRoll}"
+                                    partialSubmit="true"
+                                    icon="/icons/unchecked.png"/>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.FillRollNewVO2.collectionModel}"
+                        var="row" rows="#{bindings.FillRollNewVO2.rangeSize}"
+                        emptyText="#{bindings.FillRollNewVO2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.FillRollNewVO2.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.FillRollNewVO2Query.queryDescriptor}"
+                        queryListener="#{bindings.FillRollNewVO2Query.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.FillRollNewVO2.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.FillRollNewVO2.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t8"
+                        binding="#{MyBean.fillRollNewPopUpTable}"
+                        partialTriggers="::cb18">
+                <af:column id="c74" headerText="Select Box" width="30"
+                           align="center">
+                  <af:selectBooleanCheckbox value="#{row.bindings.SelctionBox.inputValue}"
+                                            label="#{row.bindings.SelctionBox.label}"
+                                            shortDesc="#{bindings.FillRollNewVO2.hints.SelctionBox.tooltip}"
+                                            id="sbc4" autoSubmit="true"/>
+                </af:column>
+                <af:column sortProperty="InvoiceNo" filterable="true"
+                           sortable="true"
+                           headerText="Invoice No."
+                           id="c72" align="center" width="130">
+                  <af:outputText value="#{row.InvoiceNo}" id="ot37"/>
+                </af:column>
+                <af:column id="c76" headerText="Roll No." align="center">
+                  <af:column sortProperty="SuppRollNo" filterable="true"
+                             sortable="true"
+                             headerText="Supplier Roll No."
+                             id="c71" align="center">
+                    <af:outputText value="#{row.SuppRollNo}" id="ot43"/>
+                  </af:column>
+                  <af:column sortProperty="RollNo" filterable="true"
+                             sortable="true"
+                             headerText="Factory Roll No."
+                             id="c67" align="center">
+                    <af:outputText value="#{row.RollNo}" id="ot38"/>
+                  </af:column>
+                </af:column>
+                <af:column id="c73" headerText="Roll Length Yrds"
+                           align="center">
+                  <af:column id="c61" headerText="Yards" align="center"
+                             sortable="true" filterable="true"
+                             sortProperty="RollLength" width="65">
+                    <af:outputText value="#{row.RollLength}" id="ot39">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.FillRollNewVO2.hints.RollLength.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column headerText="Inch" id="c65" align="center"
+                             sortable="true" filterable="true"
+                             sortProperty="RollLength2" width="65">
+                    <af:outputText value="#{row.RollLength2}" id="ot41">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.FillRollNewVO2.hints.RollLength2.format}"/>
+                    </af:outputText>
+                  </af:column>
+                </af:column>
+                <af:column id="c77" headerText="Total Roll Qty" align="center">
+                  <af:column sortProperty="TotalAlocRolls" filterable="true"
+                             sortable="true"
+                             headerText="Total Allocated Rolls"
+                             id="c64" align="center" width="65">
+                    <af:outputText value="#{row.TotalAlocRolls}" id="ot45">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.FillRollNewVO2.hints.TotalAlocRolls.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="TotalAlocYrds" filterable="true"
+                             sortable="true"
+                             headerText="Total Allocated Yrds"
+                             id="c68" align="center" width="65">
+                    <af:outputText value="#{row.TotalAlocYrds}" id="ot44">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.FillRollNewVO2.hints.TotalAlocYrds.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="TotalAlocInch" filterable="true"
+                             sortable="true"
+                             headerText="Total Allocated Inch"
+                             id="c69" align="center" width="65">
+                    <af:outputText value="#{row.TotalAlocInch}" id="ot47">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.FillRollNewVO2.hints.TotalAlocInch.format}"/>
+                    </af:outputText>
+                  </af:column>
+                </af:column>
+                <af:column headerText="Op. Unit"
+                           id="c75" sortable="true" filterable="true"
+                           sortProperty="OrgId" align="center" width="40">
+                  <af:outputText value="#{row.OrgId}" id="ot48">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.FillRollNewVO2.hints.OrgId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="BuyerName" filterable="true"
+                           sortable="true"
+                           headerText="Buyer"
+                           id="c63" align="center" width="120">
+                  <af:outputText value="#{row.BuyerName}" id="ot42"/>
+                </af:column>
+                <af:column sortProperty="Season" filterable="true"
+                           sortable="true"
+                           headerText="Season"
+                           id="c66" align="center">
+                  <af:outputText value="#{row.Season}" id="ot34"/>
+                </af:column>
+                <af:column sortProperty="Style" filterable="true"
+                           sortable="true"
+                           headerText="Style"
+                           id="c70" align="center" width="135">
+                  <af:outputText value="#{row.Style}" id="ot35"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:dialog>
+        </af:popup>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

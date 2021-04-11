@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjMfgFabinsPtrnalocLView"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  SelectList="MnjMfgFabinsPtrnalocL.ALOC_LINE_ID, 
+       MnjMfgFabinsPtrnalocL.PROD_L_ID, 
+       MnjMfgFabinsPtrnalocL.SHRINK_PATTERN, 
+       MnjMfgFabinsPtrnalocL.LENGTH_WISE_FROM, 
+       MnjMfgFabinsPtrnalocL.LENGTH_WISE_TO, 
+       MnjMfgFabinsPtrnalocL.WIDTH_WISE_FROM, 
+       MnjMfgFabinsPtrnalocL.WIDTH_WISE_TO, 
+       MnjMfgFabinsPtrnalocL.TOTAL_ROLLS, 
+       MnjMfgFabinsPtrnalocL.TOTAL_YRDS, 
+       MnjMfgFabinsPtrnalocL.REAMARKS"
+  FromList="MNJ_MFG_FABINS_PTRNALOC_L MnjMfgFabinsPtrnalocL"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  RowClass="mnj.mfg.model.views.MnjMfgFabinsPtrnalocLViewRowImpl"
+  ComponentClass="mnj.mfg.model.views.MnjMfgFabinsPtrnalocLViewImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="ShrinkPatternVO1"
+    ViewObjectName="mnj.mfg.model.lovviews.ShrinkPatternVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ShrinkPatternVO2"
+    ViewObjectName="mnj.mfg.model.lovviews.ShrinkPatternVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_ShrinkPattern"
+    ListVOName="ShrinkPatternVO2"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_ShrinkPattern_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ShrinkPattern"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <EntityUsage
+    Name="MnjMfgFabinsPtrnalocL"
+    Entity="mnj.mfg.model.entities.MnjMfgFabinsPtrnalocL"/>
+  <ViewAttribute
+    Name="AlocLineId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="AlocLineId"
+    EntityUsage="MnjMfgFabinsPtrnalocL"
+    AliasName="ALOC_LINE_ID"/>
+  <ViewAttribute
+    Name="ProdLId"
+    PrecisionRule="true"
+    EntityAttrName="ProdLId"
+    EntityUsage="MnjMfgFabinsPtrnalocL"
+    AliasName="PROD_L_ID"/>
+  <ViewAttribute
+    Name="ShrinkPattern"
+    PrecisionRule="true"
+    EntityAttrName="ShrinkPattern"
+    EntityUsage="MnjMfgFabinsPtrnalocL"
+    AliasName="SHRINK_PATTERN"
+    LOVName="LOV_ShrinkPattern">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LengthWiseFrom"
+    PrecisionRule="true"
+    EntityAttrName="LengthWiseFrom"
+    EntityUsage="MnjMfgFabinsPtrnalocL"
+    AliasName="LENGTH_WISE_FROM"/>
+  <ViewAttribute
+    Name="LengthWiseTo"
+    PrecisionRule="true"
+    EntityAttrName="LengthWiseTo"
+    EntityUsage="MnjMfgFabinsPtrnalocL"
+    AliasName="LENGTH_WISE_TO"/>
+  <ViewAttribute
+    Name="WidthWiseFrom"
+    PrecisionRule="true"
+    EntityAttrName="WidthWiseFrom"
+    EntityUsage="MnjMfgFabinsPtrnalocL"
+    AliasName="WIDTH_WISE_FROM"/>
+  <ViewAttribute
+    Name="WidthWiseTo"
+    PrecisionRule="true"
+    EntityAttrName="WidthWiseTo"
+    EntityUsage="MnjMfgFabinsPtrnalocL"
+    AliasName="WIDTH_WISE_TO"/>
+  <ViewAttribute
+    Name="TotalRolls"
+    PrecisionRule="true"
+    EntityAttrName="TotalRolls"
+    EntityUsage="MnjMfgFabinsPtrnalocL"
+    AliasName="TOTAL_ROLLS"/>
+  <ViewAttribute
+    Name="TotalYrds"
+    PrecisionRule="true"
+    EntityAttrName="TotalYrds"
+    EntityUsage="MnjMfgFabinsPtrnalocL"
+    AliasName="TOTAL_YRDS"/>
+  <ViewAttribute
+    Name="Reamarks"
+    PrecisionRule="true"
+    EntityAttrName="Reamarks"
+    EntityUsage="MnjMfgFabinsPtrnalocL"
+    AliasName="REAMARKS"/>
+  <ViewLinkAccessor
+    Name="MnjMfgFabinsPtrnalocDView"
+    ViewLink="mnj.mfg.model.views.viewlinks.MnjMfgFabinsPtrnalocDFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

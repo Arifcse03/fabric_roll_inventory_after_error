@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="Query">
+    <page>/Query.jspx</page>
+    <input-page-parameter>
+      <from-value>#{param.ParamOrgId}</from-value>
+      <to-value>#{viewScope.OrgId}</to-value>
+    </input-page-parameter>
+    <input-page-parameter>
+      <from-value>#{param.ParamUserId}</from-value>
+      <to-value>#{viewScope.UserId}</to-value>
+    </input-page-parameter>
+    <input-page-parameter>
+      <from-value>#{param.ParamRespId}</from-value>
+      <to-value>#{viewScope.RespId}</to-value>
+    </input-page-parameter>
+    <input-page-parameter>
+      <from-value>#{param.ParamRespApplId}</from-value>
+      <to-value>#{viewScope.RespApplId}</to-value>
+    </input-page-parameter>
+  </view>
+  <view id="Production">
+    <page>/Edit.jspx</page>
+  </view>
+  <router id="fabricInsRouter">
+    <case>
+      <expression>#{sessionScope.FormVal=='INV'}</expression>
+      <outcome id="__28">goInventory</outcome>
+    </case>
+    <case>
+      <expression>#{sessionScope.FormVal=='PROD'}</expression>
+      <outcome id="__29">goProduction</outcome>
+    </case>
+    <default-outcome>goProduction</default-outcome>
+  </router>
+  <view id="Inventory">
+    <page>/Inventory.jspx</page>
+  </view>
+  <control-flow-rule id="__1">
+    <from-activity-id id="__2">Query</from-activity-id>
+    <control-flow-case id="__4">
+      <from-outcome id="__5">goRouter</from-outcome>
+      <to-activity-id id="__3">fabricInsRouter</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__38">
+      <from-outcome id="__40">go to inventory</from-outcome>
+      <to-activity-id id="__39">Inventory</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__42">
+      <from-outcome id="__43">*gotoproduction</from-outcome>
+      <to-activity-id id="__41">Production</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__6">
+    <from-activity-id id="__7">Production</from-activity-id>
+    <control-flow-case id="__8">
+      <from-outcome id="__10">goQuery</from-outcome>
+      <to-activity-id id="__9">Query</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__15">
+    <from-activity-id id="__16">fabricInsRouter</from-activity-id>
+    <control-flow-case id="__17">
+      <from-outcome id="__19">goProduction</from-outcome>
+      <to-activity-id id="__18">Production</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__21">
+      <from-outcome id="__22">goInventory</from-outcome>
+      <to-activity-id id="__20">Inventory</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__23">
+    <from-activity-id id="__24">Inventory</from-activity-id>
+    <control-flow-case id="__25">
+      <from-outcome id="__27">goQuery</from-outcome>
+      <to-activity-id id="__26">Query</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <managed-bean id="__11">
+    <managed-bean-name id="__14">MyBean</managed-bean-name>
+    <managed-bean-class id="__12">mnj.mfg.view.backing_bean.Main</managed-bean-class>
+    <managed-bean-scope id="__13">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__31">
+    <managed-bean-name id="__32">ProdPgBean</managed-bean-name>
+    <managed-bean-class id="__33">mnj.mfg.view.backing_bean.ProdBean</managed-bean-class>
+    <managed-bean-scope id="__30">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__36">
+    <managed-bean-name id="__37">PatAlocBean</managed-bean-name>
+    <managed-bean-class id="__34">mnj.mfg.view.backing_bean.PatAlocBean</managed-bean-class>
+    <managed-bean-scope id="__35">request</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

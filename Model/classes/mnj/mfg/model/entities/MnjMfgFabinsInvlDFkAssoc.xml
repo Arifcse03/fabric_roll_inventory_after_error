@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjMfgFabinsInvlDFkAssoc"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="MnjMfgFabinsInvlEO"
+    Cardinality="1"
+    Source="true"
+    Owner="mnj.mfg.model.entities.MnjMfgFabinsInvlEO">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="MnjMfgFabinsInvlEO"/>
+      <Attr Name="_foreignKey"
+        Value="mnj.mfg.model.entities.MnjMfgFabinsInvlEO.MnjMfgFabinsInvlPk"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.MnjMfgFabinsInvlEO.LineId"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="MnjMfgFabinsInvlDEO"
+    Cardinality="-1"
+    Owner="mnj.mfg.model.entities.MnjMfgFabinsInvlDEO">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="MnjMfgFabinsInvlDEO"/>
+      <Attr Name="_foreignKey"
+        Value="mnj.mfg.model.entities.MnjMfgFabinsInvlDEO.MnjMfgFabinsInvlDFk"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.MnjMfgFabinsInvlDEO.LineId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

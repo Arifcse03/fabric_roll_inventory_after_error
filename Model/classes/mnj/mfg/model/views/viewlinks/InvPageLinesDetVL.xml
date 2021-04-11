@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="InvPageLinesDetVL"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  EntityAssociation="mnj.mfg.model.entities.MnjMfgFabinsInvlDFkAssoc">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.views.viewlinks.InvPageLinesDetVL_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="InvPageLinesVO"
+    Cardinality="1"
+    Owner="mnj.mfg.model.views.InvPageLinesVO"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="InvPageLinesVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.views.InvPageLinesVO.LineId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="InvPageDetailsVO"
+    Cardinality="-1"
+    Owner="mnj.mfg.model.views.InvPageDetailsVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="InvPageDetailsVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.views.InvPageDetailsVO.LineId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

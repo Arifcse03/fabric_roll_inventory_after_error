@@ -1,0 +1,11 @@
+The following Synchronization Actions were performed successfully:
+
+Entity :MnjMfgFabinsProdLEO
+  Attribute :FabComp
+    Change Column type to VARCHAR2
+    Change Precision to 100
+  Attribute :FabCons
+    Change Column type to VARCHAR2
+    Change Precision to 100
+  Attribute :Color
+    Change Precision to 500

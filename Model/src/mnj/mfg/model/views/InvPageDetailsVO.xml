@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="InvPageDetailsVO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="mnj.mfg.model.views.InvPageDetailsVORowImpl"
+  ComponentClass="mnj.mfg.model.views.InvPageDetailsVOImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.views.InvPageDetailsVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="InvStyleVO1"
+    ViewObjectName="mnj.mfg.model.lovviews.InvStyleVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="InvStyleVOCriteriaCustom"
+      FullName="mnj.mfg.model.lovviews.InvStyleVO.InvStyleVOCriteriaCustom"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="BuyerVO1"
+    ViewObjectName="mnj.mfg.model.lovviews.BuyerVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ColorVO1"
+    ViewObjectName="mnj.mfg.model.lovviews.ColorVO">
+    <ParameterMap>
+      <PIMap Variable="P_STYLE_NAME">
+        <TransientExpression><![CDATA[Style]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="P_BUYER_ID">
+        <TransientExpression><![CDATA[BuyerId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="P_SEASON">
+        <TransientExpression><![CDATA[Season]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ColorRollInv1"
+    ViewObjectName="mnj.mfg.model.lovviews.ColorRollInv">
+    <ParameterMap>
+      <PIMap Variable="P_BUYER_ID">
+        <TransientExpression><![CDATA[BuyerId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="P_SEASON">
+        <TransientExpression><![CDATA[Season]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="P_STYLE_NAME">
+        <TransientExpression><![CDATA[Style]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="HeaderVO1"
+    ViewObjectName="mnj.mfg.model.views.HeaderVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PocInsertLov1"
+    ViewObjectName="mnj.mfg.model.lovviews.FillRoll.PocInsertLov"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_CusotmerName"
+    ListVOName="BuyerVO1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_CusotmerName_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CusotmerName"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="BuyerId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="BuyerShortName"/>
+      <Item Value="CustomerId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="BuyerShortName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FinishColor"
+    ListVOName="ColorRollInv1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_FinishColor_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FinishColor"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Color"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PocId"
+    ListVOName="PocInsertLov1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_PocId_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PocId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PocId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="PocId"/>
+      <Item Value="BuyerName"/>
+      <Item Value="Style"/>
+      <Item Value="Season"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[SELECT
+MNJMFGFABINSINVLDEO.BUYER_ID,
+MNJMFGFABINSINVLDEO.DETAIL_ID,
+MNJMFGFABINSINVLDEO.FAB_CONS,
+MNJMFGFABINSINVLDEO.FAB_CONST,
+MNJMFGFABINSINVLDEO.FINISH_COLOR,
+MNJMFGFABINSINVLDEO.LINE_ID,
+MNJMFGFABINSINVLDEO.POC_ID,
+POC.BUYER_NAME ,
+POC.SEASON,
+POC.STYLE
+FROM MNJ_MFG_FABINS_INVL_D MNJMFGFABINSINVLDEO ,
+(SELECT DISTINCT H.POC_ID, H.BUYER_ID,(SELECT CUSTOMER_NAME BUYER_NAME
+FROM AR_CUSTOMERS
+WHERE CUSTOMER_ID = H.BUYER_ID)
+BUYER_NAME, H.SEASON,H.STYLE FROM XX_OM_POC_H_T H ) POC
+WHERE MNJMFGFABINSINVLDEO.POC_ID = POC.POC_ID]]>
+  </SQLQuery>
+  <EntityUsage
+    Name="MnjMfgFabinsInvlDEO"
+    Entity="mnj.mfg.model.entities.MnjMfgFabinsInvlDEO"/>
+  <ViewAttribute
+    Name="BuyerId"
+    PrecisionRule="true"
+    EntityAttrName="BuyerId"
+    EntityUsage="MnjMfgFabinsInvlDEO"
+    AliasName="BUYER_ID"/>
+  <ViewAttribute
+    Name="DetailId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DetailId"
+    EntityUsage="MnjMfgFabinsInvlDEO"
+    AliasName="DETAIL_ID"/>
+  <ViewAttribute
+    Name="FabCons"
+    PrecisionRule="true"
+    EntityAttrName="FabCons"
+    EntityUsage="MnjMfgFabinsInvlDEO"
+    AliasName="FAB_CONS"/>
+  <ViewAttribute
+    Name="FabConst"
+    PrecisionRule="true"
+    EntityAttrName="FabConst"
+    EntityUsage="MnjMfgFabinsInvlDEO"
+    AliasName="FAB_CONST"/>
+  <ViewAttribute
+    Name="FinishColor"
+    LOVName="LOV_FinishColor"
+    PrecisionRule="true"
+    EntityAttrName="FinishColor"
+    EntityUsage="MnjMfgFabinsInvlDEO"
+    AliasName="FINISH_COLOR">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LineId"
+    PrecisionRule="true"
+    EntityAttrName="LineId"
+    EntityUsage="MnjMfgFabinsInvlDEO"
+    AliasName="LINE_ID"/>
+  <ViewAttribute
+    Name="PocId"
+    PrecisionRule="true"
+    EntityAttrName="PocId"
+    EntityUsage="MnjMfgFabinsInvlDEO"
+    AliasName="POC_ID"
+    LOVName="LOV_PocId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BuyerName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUYER_NAME"
+    Expression="BUYER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Season"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEASON"
+    Expression="SEASON"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Style"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STYLE"
+    Expression="STYLE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CusotmerName"
+    LOVName="LOV_CusotmerName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUSOTMER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

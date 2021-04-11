@@ -1,0 +1,1160 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FillRollVO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.views.FillRollVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery>
+    <![CDATA[SELECT MMFIL.HEADER_ID,
+       MMFIL.LINE_ID FAB_ROLL_INV_LINE_ID,
+       MMFIL.TOTAL_ROLLS,
+       MMFIL.TOTAL_YARDS,
+       MMFIL.STYLE_SEASON FAB_ROLL_INV_LINE_SEASON_STYLE,
+       MMFIL.COLOR FAB_ROLL_INV_COLOR,
+       MMFD.AW_LENGTH,
+       MMFD.AW_WIDTH,
+       MMFD.DETAIL_ID,
+       MMFD.DETID_ID2,
+       MMFD.LINE_ID,
+       MMFD.LINE_TYPE,
+       MMFD.REMARKS,
+       MMFD.ROLL_LENGTH,
+       MMFD.ROLL_NO,
+       MMFD.ROLL_WIDTH,
+       MMFD.SHADE,
+       MMFD.SHRINK_LENGTH,
+       MMFD.SHRINK_PRC_LENGTH,
+       MMFD.SHRINK_PRC_WIDTH,
+       MMFD.SHRINK_WIDTH,
+       MMFD.ROLL_SR_NO,
+       MMFD.UOM,
+       MMFD.ROLL_LENGTH2,
+       MMFD.ROL_LENGTH3,
+       MMFD.ROL_LENGTH4,
+       MMFD.SUPPLIER_SERIAL_NO,
+       MMFD.TRANSFER_SELECTION,
+       IIBH.CREATION_DATE,
+       IIBSD.PI_NO,
+       DECODE (MSI.SEGMENT3,  '02', IIBD.INVOICE_NO,  '01', IIBSD.PI_NO)
+          INVOICE_NUMBER,
+       IIBSD.IMP_BBLC_PI_DETAIL_ID,
+       IIBD.IMP_BBLC_DETAIL_ID,
+       IIBD.INVOICE_NO,
+       IIBSD.ATTRIBUTE5 INVENTORY_ITEM_ID,
+       IIBSD.BPO SPO,
+       IIBSD.ATTRIBUTE6 STYLE_SEASON,
+       IIBSD.ATTRIBUTE3 SHIP_NUMBER,
+       IIBH.ORG_ID,
+       RSH.RECEIPT_NUM,
+       (SELECT FFVT.DESCRIPTION VALUE_DESCRIPTION
+          FROM FND_FLEX_VALUE_SETS FFVS,
+               FND_FLEX_VALUES FFV,
+               FND_FLEX_VALUES_TL FFVT
+         WHERE     FFVS.FLEX_VALUE_SET_ID = FFV.FLEX_VALUE_SET_ID
+               AND FFV.FLEX_VALUE_ID = FFVT.FLEX_VALUE_ID
+               AND FFVS.FLEX_VALUE_SET_ID = 1014895
+               AND FFV.FLEX_VALUE = MSI.SEGMENT4)
+          COLOR,
+       PHA.AGENT_ID,
+       PAV.AGENT_NAME,
+       SUBSTR (IIBSD.ATTRIBUTE6, 1, INSTR (IIBSD.ATTRIBUTE6, '~') - 1) STYLE,
+       SUBSTR (IIBSD.ATTRIBUTE6, INSTR (IIBSD.ATTRIBUTE6, '~') + 1) SEASON,
+       RSH.VENDOR_ID,
+       TRIM (',' FROM MNJ_MFG_SHRINK_GETGRN_DATES (RSH.SHIPMENT_HEADER_ID))
+          GRN_DATE,
+       (SELECT AP.VENDOR_NAME
+          FROM AP_SUPPLIERS AP
+         WHERE AP.VENDOR_ID = RSH.VENDOR_ID)
+          SUPPLIER,
+       (SELECT IISCH.BUYER_ID
+          FROM IEDOC_IMP_SALE_CONTR_HEADERS IISCH
+         WHERE     (   IISCH.IMP_SALE_CONTRACT_NO =
+                          (SELECT IIBC.BBLC_CONTRACT_NO
+                             FROM IEDOC_IMP_BBLC_CONTRACTS IIBC
+                            WHERE     IIBC.IMP_BBLC_HEADER_ID =
+                                         IIBH.IMP_BBLC_HEADER_ID       /*649*/
+                                  AND ROWNUM = 1)
+                    OR IISCH.EXPORT_LC_NO =
+                          (SELECT IIBC.EXPORT_LC_NO
+                             FROM IEDOC_IMP_BBLC_CONTRACTS IIBC
+                            WHERE     IIBC.IMP_BBLC_HEADER_ID =
+                                         IIBH.IMP_BBLC_HEADER_ID       /*649*/
+                                  AND ROWNUM = 1))
+               AND ROWNUM = 1)
+          BUYERID,
+       (SELECT IISCH.BUYER_NAME_NEW
+          FROM IEDOC_IMP_SALE_CONTR_HEADERS IISCH
+         WHERE     (   IISCH.IMP_SALE_CONTRACT_NO =
+                          (SELECT IIBC.BBLC_CONTRACT_NO
+                             FROM IEDOC_IMP_BBLC_CONTRACTS IIBC
+                            WHERE     IMP_BBLC_HEADER_ID =
+                                         IIBH.IMP_BBLC_HEADER_ID
+                                  AND ROWNUM = 1)
+                    OR IISCH.EXPORT_LC_NO =
+                          (SELECT IIBC.EXPORT_LC_NO
+                             FROM IEDOC_IMP_BBLC_CONTRACTS IIBC
+                            WHERE     IIBC.IMP_BBLC_HEADER_ID =
+                                         IIBH.IMP_BBLC_HEADER_ID       /*649*/
+                                  AND ROWNUM = 1))
+               AND ROWNUM = 1)
+          BUYERNAME,
+       OOD.ORGANIZATION_NAME,
+       (SELECT MSI.ATTRIBUTE8
+          FROM MTL_SYSTEM_ITEMS MSI
+         WHERE     MSI.ORGANIZATION_ID = 353
+               AND MSI.INVENTORY_ITEM_ID = IIBSD.ATTRIBUTE5)
+          CONSTRUCTION,
+       (SELECT MSI.ATTRIBUTE6
+          FROM MTL_SYSTEM_ITEMS MSI
+         WHERE     MSI.ORGANIZATION_ID = 353
+               AND MSI.INVENTORY_ITEM_ID = IIBSD.ATTRIBUTE5)
+          COMPOSITION,
+       (SELECT CASE
+                  WHEN INSTR (TRIM (MSI.ATTRIBUTE12), '.') = 0
+                  THEN
+                     REGEXP_REPLACE (TRIM (MSI.ATTRIBUTE12), '[^0-9]', '')
+                  ELSE
+                        SUBSTR (
+                           REGEXP_REPLACE (TRIM (MSI.ATTRIBUTE12),
+                                           '[^0-9]',
+                                           ''),
+                           1,
+                           INSTR (TRIM (MSI.ATTRIBUTE12), '.') - 1)
+                     || '.'
+                     || SUBSTR (
+                           REGEXP_REPLACE (TRIM (MSI.ATTRIBUTE12),
+                                           '[^0-9]',
+                                           ''),
+                           INSTR (TRIM (MSI.ATTRIBUTE12), '.'))
+               END
+          FROM MTL_SYSTEM_ITEMS MSI
+         WHERE     MSI.ORGANIZATION_ID = 353
+               AND MSI.INVENTORY_ITEM_ID = IIBSD.ATTRIBUTE5)
+          FAB_OUNCE,
+       NVL (IIBSD.PARTIAL_PL, 'false') PARTIAL_PL
+  FROM IEDOC_IMP_BBLC_SUB_DET_PI IIBSD,
+       IEDOC_IMP_BBLC_DETAILS IIBD,
+       IEDOC_IMP_BBLC_LINES IIBL,
+       IEDOC_IMP_BBLC_HEADERS IIBH,
+       MNJ_MFG_FABRIC_INS_TEST_H MMFIH,
+       MNJ_MFG_FABINS_INVL MMFIL,
+       MNJ_MFG_FABINS_INVL_D2 MMFD,
+       ORG_ORGANIZATION_DEFINITIONS OOD,
+       RCV_SHIPMENT_HEADERS RSH,
+       MTL_SYSTEM_ITEMS_KFV MSI,
+       PO_HEADERS_ALL PHA,
+       PO_AGENTS_V PAV
+ WHERE     IIBL.IMP_BBLC_HEADER_ID = IIBH.IMP_BBLC_HEADER_ID
+       AND IIBD.IMP_BBLC_LINE_ID = IIBL.IMP_BBLC_LINE_ID
+       AND IIBD.IMP_BBLC_DETAIL_ID = IIBSD.IMP_BBLC_DETAIL_ID
+       AND MMFIH.HEADER_ID = MMFIL.HEADER_ID
+       AND MMFIL.LINE_ID = MMFD.LINE_ID
+       AND OOD.OPERATING_UNIT = IIBH.ORG_ID
+       AND PHA.SEGMENT1 = IIBSD.BPO
+       --AND trunc(regexp_replace(rsh.shipment_num, '[A-Za-z]'))=IIBSD.ATTRIBUTE3
+       AND SUBSTR (RSH.SHIPMENT_NUM, 1, INSTR (RSH.SHIPMENT_NUM, '.') - 1) =
+              IIBSD.ATTRIBUTE3
+       AND RSH.SHIP_TO_ORG_ID = OOD.ORGANIZATION_ID
+       AND MSI.INVENTORY_ITEM_ID = IIBSD.ATTRIBUTE5
+       AND MSI.ORGANIZATION_ID = OOD.ORGANIZATION_ID
+       AND PHA.ORG_ID = OOD.OPERATING_UNIT
+       AND PAV.AGENT_ID = PHA.AGENT_ID
+       AND IIBSD.ATTRIBUTE3 IS NOT NULL
+       AND IIBSD.ATTRIBUTE6 = MMFIL.STYLE_SEASON
+       
+       AND MMFIL.TOTAL_ROLLS IS NOT NULL
+       AND MMFIL.TOTAL_YARDS IS NOT NULL
+       
+       AND MMFIH.INVOICE_NO = IIBD.INVOICE_NO
+       
+       
+       UNION ALL
+       
+       SELECT MMFIL.HEADER_ID,
+       MMFIL.LINE_ID FAB_ROLL_INV_LINE_ID,
+       MMFIL.TOTAL_ROLLS,
+       MMFIL.TOTAL_YARDS,
+       MMFIL.STYLE_SEASON FAB_ROLL_INV_LINE_SEASON_STYLE,
+       MMFIL.COLOR FAB_ROLL_INV_COLOR,
+       MMFD.AW_LENGTH,
+       MMFD.AW_WIDTH,
+       MMFD.DETAIL_ID,
+       MMFD.DETID_ID2,
+       MMFD.LINE_ID,
+       MMFD.LINE_TYPE,
+       MMFD.REMARKS,
+       MMFD.ROLL_LENGTH,
+       MMFD.ROLL_NO,
+       MMFD.ROLL_WIDTH,
+       MMFD.SHADE,
+       MMFD.SHRINK_LENGTH,
+       MMFD.SHRINK_PRC_LENGTH,
+       MMFD.SHRINK_PRC_WIDTH,
+       MMFD.SHRINK_WIDTH,
+       MMFD.ROLL_SR_NO,
+       MMFD.UOM,
+       MMFD.ROLL_LENGTH2,
+       MMFD.ROL_LENGTH3,
+       MMFD.ROL_LENGTH4,
+       MMFD.SUPPLIER_SERIAL_NO,
+       MMFD.TRANSFER_SELECTION,
+       IIBH.CREATION_DATE,
+       IIBSD.PI_NO,
+       DECODE (MSI.SEGMENT3,  '02', IIBD.INVOICE_NO,  '01', IIBSD.PI_NO)
+          INVOICE_NUMBER,
+       IIBSD.IMP_BBLC_PI_DETAIL_ID,
+       IIBD.IMP_BBLC_DETAIL_ID,
+       IIBD.INVOICE_NO,
+       IIBSD.ATTRIBUTE5 INVENTORY_ITEM_ID,
+       IIBSD.BPO SPO,
+       IIBSD.ATTRIBUTE6 STYLE_SEASON,
+       IIBSD.ATTRIBUTE3 SHIP_NUMBER,
+       IIBH.ORG_ID,
+       NULL,
+       (SELECT FFVT.DESCRIPTION VALUE_DESCRIPTION
+          FROM FND_FLEX_VALUE_SETS FFVS,
+               FND_FLEX_VALUES FFV,
+               FND_FLEX_VALUES_TL FFVT
+         WHERE     FFVS.FLEX_VALUE_SET_ID = FFV.FLEX_VALUE_SET_ID
+               AND FFV.FLEX_VALUE_ID = FFVT.FLEX_VALUE_ID
+               AND FFVS.FLEX_VALUE_SET_ID = 1014895
+               AND FFV.FLEX_VALUE = MSI.SEGMENT4)
+          COLOR,
+       PHA.AGENT_ID,
+       PAV.AGENT_NAME,
+       SUBSTR (IIBSD.ATTRIBUTE6, 1, INSTR (IIBSD.ATTRIBUTE6, '~') - 1) STYLE,
+       SUBSTR (IIBSD.ATTRIBUTE6, INSTR (IIBSD.ATTRIBUTE6, '~') + 1) SEASON,
+       PHA.VENDOR_ID,
+       NULL,
+       (SELECT AP.VENDOR_NAME
+          FROM AP_SUPPLIERS AP
+         WHERE AP.VENDOR_ID = PHA.VENDOR_ID)
+          SUPPLIER,
+       (SELECT IISCH.BUYER_ID
+          FROM IEDOC_IMP_SALE_CONTR_HEADERS IISCH
+         WHERE     (   IISCH.IMP_SALE_CONTRACT_NO =
+                          (SELECT IIBC.BBLC_CONTRACT_NO
+                             FROM IEDOC_IMP_BBLC_CONTRACTS IIBC
+                            WHERE     IIBC.IMP_BBLC_HEADER_ID =
+                                         IIBH.IMP_BBLC_HEADER_ID       /*649*/
+                                  AND ROWNUM = 1)
+                    OR IISCH.EXPORT_LC_NO =
+                          (SELECT IIBC.EXPORT_LC_NO
+                             FROM IEDOC_IMP_BBLC_CONTRACTS IIBC
+                            WHERE     IIBC.IMP_BBLC_HEADER_ID =
+                                         IIBH.IMP_BBLC_HEADER_ID       /*649*/
+                                  AND ROWNUM = 1))
+               AND ROWNUM = 1)
+          BUYERID,
+       (SELECT IISCH.BUYER_NAME_NEW
+          FROM IEDOC_IMP_SALE_CONTR_HEADERS IISCH
+         WHERE     (   IISCH.IMP_SALE_CONTRACT_NO =
+                          (SELECT IIBC.BBLC_CONTRACT_NO
+                             FROM IEDOC_IMP_BBLC_CONTRACTS IIBC
+                            WHERE     IMP_BBLC_HEADER_ID =
+                                         IIBH.IMP_BBLC_HEADER_ID
+                                  AND ROWNUM = 1)
+                    OR IISCH.EXPORT_LC_NO =
+                          (SELECT IIBC.EXPORT_LC_NO
+                             FROM IEDOC_IMP_BBLC_CONTRACTS IIBC
+                            WHERE     IIBC.IMP_BBLC_HEADER_ID =
+                                         IIBH.IMP_BBLC_HEADER_ID       /*649*/
+                                  AND ROWNUM = 1))
+               AND ROWNUM = 1)
+          BUYERNAME,
+       OOD.ORGANIZATION_NAME,
+       (SELECT MSI.ATTRIBUTE8
+          FROM MTL_SYSTEM_ITEMS MSI
+         WHERE     MSI.ORGANIZATION_ID = 353
+               AND MSI.INVENTORY_ITEM_ID = IIBSD.ATTRIBUTE5)
+          CONSTRUCTION,
+       (SELECT MSI.ATTRIBUTE6
+          FROM MTL_SYSTEM_ITEMS MSI
+         WHERE     MSI.ORGANIZATION_ID = 353
+               AND MSI.INVENTORY_ITEM_ID = IIBSD.ATTRIBUTE5)
+          COMPOSITION,
+       (SELECT CASE
+                  WHEN INSTR (TRIM (MSI.ATTRIBUTE12), '.') = 0
+                  THEN
+                     REGEXP_REPLACE (TRIM (MSI.ATTRIBUTE12), '[^0-9]', '')
+                  ELSE
+                        SUBSTR (
+                           REGEXP_REPLACE (TRIM (MSI.ATTRIBUTE12),
+                                           '[^0-9]',
+                                           ''),
+                           1,
+                           INSTR (TRIM (MSI.ATTRIBUTE12), '.') - 1)
+                     || '.'
+                     || SUBSTR (
+                           REGEXP_REPLACE (TRIM (MSI.ATTRIBUTE12),
+                                           '[^0-9]',
+                                           ''),
+                           INSTR (TRIM (MSI.ATTRIBUTE12), '.'))
+               END
+          FROM MTL_SYSTEM_ITEMS MSI
+         WHERE     MSI.ORGANIZATION_ID = 353
+               AND MSI.INVENTORY_ITEM_ID = IIBSD.ATTRIBUTE5)
+          FAB_OUNCE,
+       NVL (IIBSD.PARTIAL_PL, 'false') PARTIAL_PL
+  FROM IEDOC_IMP_BBLC_SUB_DET_PI IIBSD,
+       IEDOC_IMP_BBLC_DETAILS IIBD,
+       IEDOC_IMP_BBLC_LINES IIBL,
+       IEDOC_IMP_BBLC_HEADERS IIBH,
+       MNJ_MFG_FABRIC_INS_TEST_H MMFIH,
+       MNJ_MFG_FABINS_INVL MMFIL,
+       MNJ_MFG_FABINS_INVL_D2 MMFD,
+       ORG_ORGANIZATION_DEFINITIONS OOD,
+       MTL_SYSTEM_ITEMS_KFV MSI,
+       PO_HEADERS_ALL PHA,
+       PO_AGENTS_V PAV
+ WHERE     IIBL.IMP_BBLC_HEADER_ID = IIBH.IMP_BBLC_HEADER_ID
+       AND IIBD.IMP_BBLC_LINE_ID = IIBL.IMP_BBLC_LINE_ID
+       AND IIBD.IMP_BBLC_DETAIL_ID = IIBSD.IMP_BBLC_DETAIL_ID
+       AND MMFIH.HEADER_ID = MMFIL.HEADER_ID
+       AND MMFIL.LINE_ID = MMFD.LINE_ID
+       AND OOD.OPERATING_UNIT = IIBH.ORG_ID
+       AND PHA.SEGMENT1 = IIBSD.BPO
+       AND IIBSD.ATTRIBUTE3 IS NULL
+       AND IIBSD.BPO = PHA.SEGMENT1
+       AND MSI.INVENTORY_ITEM_ID = IIBSD.ATTRIBUTE5
+       AND MSI.ORGANIZATION_ID = OOD.ORGANIZATION_ID
+       AND PHA.ORG_ID = OOD.OPERATING_UNIT
+       AND PAV.AGENT_ID = PHA.AGENT_ID
+       AND IIBSD.ATTRIBUTE6 = MMFIL.STYLE_SEASON
+       AND MMFIL.TOTAL_ROLLS IS NOT NULL
+       AND MMFIL.TOTAL_YARDS IS NOT NULL
+       AND MMFIH.INVOICE_NO = IIBD.INVOICE_NO]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="HeaderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="HEADER_ID"
+    Expression="HEADER_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FabRollInvLineId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="FAB_ROLL_INV_LINE_ID"
+    Expression="FAB_ROLL_INV_LINE_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalRolls"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_ROLLS"
+    Expression="TOTAL_ROLLS"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalYards"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_YARDS"
+    Expression="TOTAL_YARDS"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FabRollInvLineSeasonStyle"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FAB_ROLL_INV_LINE_SEASON_STYLE"
+    Expression="FAB_ROLL_INV_LINE_SEASON_STYLE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FabRollInvColor"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FAB_ROLL_INV_COLOR"
+    Expression="FAB_ROLL_INV_COLOR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AwLength"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="AW_LENGTH"
+    Expression="AW_LENGTH"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AwWidth"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="AW_WIDTH"
+    Expression="AW_WIDTH"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DetailId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="DETAIL_ID"
+    Expression="DETAIL_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DetidId2"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="DETID_ID2"
+    Expression="DETID_ID2"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LineId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="LINE_ID"
+    Expression="LINE_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LineType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LINE_TYPE"
+    Expression="LINE_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Remarks"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REMARKS"
+    Expression="REMARKS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RollLength"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ROLL_LENGTH"
+    Expression="ROLL_LENGTH"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RollNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ROLL_NO"
+    Expression="ROLL_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RollWidth"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ROLL_WIDTH"
+    Expression="ROLL_WIDTH"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Shade"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHADE"
+    Expression="SHADE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShrinkLength"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="SHRINK_LENGTH"
+    Expression="SHRINK_LENGTH"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShrinkPrcLength"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="SHRINK_PRC_LENGTH"
+    Expression="SHRINK_PRC_LENGTH"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShrinkPrcWidth"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="SHRINK_PRC_WIDTH"
+    Expression="SHRINK_PRC_WIDTH"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShrinkWidth"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="SHRINK_WIDTH"
+    Expression="SHRINK_WIDTH"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RollSrNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ROLL_SR_NO"
+    Expression="ROLL_SR_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Uom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UOM"
+    Expression="UOM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RollLength2"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ROLL_LENGTH2"
+    Expression="ROLL_LENGTH2"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RolLength3"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ROL_LENGTH3"
+    Expression="ROL_LENGTH3"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RolLength4"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ROL_LENGTH4"
+    Expression="ROL_LENGTH4"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SupplierSerialNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SUPPLIER_SERIAL_NO"
+    Expression="SUPPLIER_SERIAL_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransferSelection"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TRANSFER_SELECTION"
+    Expression="TRANSFER_SELECTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="CREATION_DATE"
+    Expression="CREATION_DATE"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PiNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PI_NO"
+    Expression="PI_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InvoiceNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INVOICE_NUMBER"
+    Expression="INVOICE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ImpBblcPiDetailId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="IMP_BBLC_PI_DETAIL_ID"
+    Expression="IMP_BBLC_PI_DETAIL_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ImpBblcDetailId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="IMP_BBLC_DETAIL_ID"
+    Expression="IMP_BBLC_DETAIL_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InvoiceNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INVOICE_NO"
+    Expression="INVOICE_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InventoryItemId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INVENTORY_ITEM_ID"
+    Expression="INVENTORY_ITEM_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Spo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SPO"
+    Expression="SPO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="StyleSeason"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STYLE_SEASON"
+    Expression="STYLE_SEASON"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_NUMBER"
+    Expression="SHIP_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrgId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ORG_ID"
+    Expression="ORG_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReceiptNum"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RECEIPT_NUM"
+    Expression="RECEIPT_NUM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Color"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COLOR"
+    Expression="COLOR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AgentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="9"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="AGENT_ID"
+    Expression="AGENT_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AgentName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="AGENT_NAME"
+    Expression="AGENT_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Style"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="750"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STYLE"
+    Expression="STYLE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="750"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Season"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="750"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEASON"
+    Expression="SEASON"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="750"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VendorId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VENDOR_ID"
+    Expression="VENDOR_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GrnDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GRN_DATE"
+    Expression="GRN_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Supplier"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SUPPLIER"
+    Expression="SUPPLIER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Buyerid"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUYERID"
+    Expression="BUYERID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Buyername"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUYERNAME"
+    Expression="BUYERNAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrganizationName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORGANIZATION_NAME"
+    Expression="ORGANIZATION_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Construction"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONSTRUCTION"
+    Expression="CONSTRUCTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Composition"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COMPOSITION"
+    Expression="COMPOSITION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FabOunce"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FAB_OUNCE"
+    Expression="FAB_OUNCE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartialPl"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTIAL_PL"
+    Expression="PARTIAL_PL"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SelectBox"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

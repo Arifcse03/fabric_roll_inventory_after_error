@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RollTransferHistoryVO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  SelectList="RollTransferHistoryEO.HISTORY_ID, 
+       RollTransferHistoryEO.PROD_L_ID, 
+       RollTransferHistoryEO.FACTORY_ROLL_NO, 
+       RollTransferHistoryEO.SUPPLIER_ROLL_NO, 
+       RollTransferHistoryEO.TRANSFER_TO_DOC"
+  FromList="MNJ_FABINS_ROLL_TRANS_HIST RollTransferHistoryEO"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+  </DesignTime>
+  <EntityUsage
+    Name="RollTransferHistoryEO"
+    Entity="mnj.mfg.model.entities.RollTransferHistoryEO"/>
+  <ViewAttribute
+    Name="HistoryId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="HistoryId"
+    EntityUsage="RollTransferHistoryEO"
+    AliasName="HISTORY_ID"/>
+  <ViewAttribute
+    Name="ProdLId"
+    PrecisionRule="true"
+    EntityAttrName="ProdLId"
+    EntityUsage="RollTransferHistoryEO"
+    AliasName="PROD_L_ID"/>
+  <ViewAttribute
+    Name="FactoryRollNo"
+    PrecisionRule="true"
+    EntityAttrName="FactoryRollNo"
+    EntityUsage="RollTransferHistoryEO"
+    AliasName="FACTORY_ROLL_NO"/>
+  <ViewAttribute
+    Name="SupplierRollNo"
+    PrecisionRule="true"
+    EntityAttrName="SupplierRollNo"
+    EntityUsage="RollTransferHistoryEO"
+    AliasName="SUPPLIER_ROLL_NO"/>
+  <ViewAttribute
+    Name="TransferToDoc"
+    PrecisionRule="true"
+    EntityAttrName="TransferToDoc"
+    EntityUsage="RollTransferHistoryEO"
+    AliasName="TRANSFER_TO_DOC"/>
+</ViewObject>

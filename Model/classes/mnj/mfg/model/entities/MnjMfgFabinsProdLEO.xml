@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjMfgFabinsProdLEO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="MNJ_MFG_FABINS_PROD_L"
+  AliasName="MnjMfgFabinsProdLEO"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="mnj.mfg.model.entities.MnjMfgFabinsProdLEOImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="ProdLId"
+    IsNotNull="true"
+    ColumnName="PROD_L_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_FABINS_PROD_L"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="HeaderId"
+    ColumnName="HEADER_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BuyerId"
+    ColumnName="BUYER_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FabCons"
+    Precision="500"
+    ColumnName="FAB_CONS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FabComp"
+    Precision="500"
+    ColumnName="FAB_COMP"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TotalAlocRolls"
+    ColumnName="TOTAL_ALOC_ROLLS"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TotalAlocYrds"
+    ColumnName="TOTAL_ALOC_YRDS"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BlncRolls"
+    ColumnName="BLNC_ROLLS"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BlncYrds"
+    ColumnName="BLNC_YRDS"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="DjCutWidth"
+    Precision="500"
+    ColumnName="DJ_CUT_WIDTH"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Inspection"
+    Precision="500"
+    ColumnName="INSPECTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TotalAlocInch"
+    ColumnName="TOTAL_ALOC_INCH"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BlncInch"
+    ColumnName="BLNC_INCH"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RawColor"
+    Precision="250"
+    ColumnName="RAW_COLOR"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Remarks"
+    Precision="1000"
+    ColumnName="REMARKS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FabOunce"
+    Precision="250"
+    ColumnName="FAB_OUNCE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FinishedGarmentsColor"
+    Precision="250"
+    ColumnName="FINISHED_GARMENTS_COLOR"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    Precision="15"
+    Scale="0"
+    ColumnName="CREATED_BY"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreationDate"
+    ColumnName="CREATION_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedBy"
+    Precision="15"
+    Scale="0"
+    ColumnName="LAST_UPDATED_BY"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdateDate"
+    ColumnName="LAST_UPDATE_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Lot"
+    Precision="500"
+    ColumnName="LOT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Wash"
+    Precision="500"
+    ColumnName="WASH"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ArticleNo"
+    Precision="500"
+    ColumnName="ARTICLE_NO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SystemId"
+    ColumnName="SYSTEM_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_FABINS_PROD_L">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="MnjMfgFabricInsTestH"
+    Association="mnj.mfg.model.entities.MnjMfgFabinsProdLFkAssoc"
+    AssociationEnd="mnj.mfg.model.entities.MnjMfgFabinsProdLFkAssoc.MnjMfgFabricInsTestH"
+    AssociationOtherEnd="mnj.mfg.model.entities.MnjMfgFabinsProdLFkAssoc.MnjMfgFabinsProdLEO"
+    Type="mnj.mfg.model.entities.MnjMfgFabricInsTestHImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="MnjMfgFabricInsTestL"
+    Association="mnj.mfg.model.entities.ProdPageLineFabShrinkAssoc"
+    AssociationEnd="mnj.mfg.model.entities.ProdPageLineFabShrinkAssoc.MnjMfgFabricInsTestL"
+    AssociationOtherEnd="mnj.mfg.model.entities.ProdPageLineFabShrinkAssoc.MnjMfgFabinsProdLEO"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="MnjMfgFabricInsTestShdL"
+    Association="mnj.mfg.model.entities.ProdPagLinesShedAssoc"
+    AssociationEnd="mnj.mfg.model.entities.ProdPagLinesShedAssoc.MnjMfgFabricInsTestShdL"
+    AssociationOtherEnd="mnj.mfg.model.entities.ProdPagLinesShedAssoc.MnjMfgFabinsProdLEO"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="FebricOunceLine"
+    Association="mnj.mfg.model.entities.ProdPageLinesFabOunceAssoc"
+    AssociationEnd="mnj.mfg.model.entities.ProdPageLinesFabOunceAssoc.FebricOunceLine"
+    AssociationOtherEnd="mnj.mfg.model.entities.ProdPageLinesFabOunceAssoc.MnjMfgFabinsProdLEO"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="MnjMfgFabinsFirstDEO"
+    Association="mnj.mfg.model.entities.MnjMfgFabinsFirstDFkAssoc"
+    AssociationEnd="mnj.mfg.model.entities.MnjMfgFabinsFirstDFkAssoc.MnjMfgFabinsFirstDEO"
+    AssociationOtherEnd="mnj.mfg.model.entities.MnjMfgFabinsFirstDFkAssoc.MnjMfgFabinsProdLEO"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="MnjMfgFabinsPtrnalocL"
+    Association="mnj.mfg.model.entities.ProdLinesPatternAlocAssoc"
+    AssociationEnd="mnj.mfg.model.entities.ProdLinesPatternAlocAssoc.MnjMfgFabinsPtrnalocL"
+    AssociationOtherEnd="mnj.mfg.model.entities.ProdLinesPatternAlocAssoc.MnjMfgFabinsProdLEO"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="RollTransferHistoryEO"
+    Association="mnj.mfg.model.entities.MnjFabinsRollTransHistFkAssoc"
+    AssociationEnd="mnj.mfg.model.entities.MnjFabinsRollTransHistFkAssoc.RollTransferHistoryEO"
+    AssociationOtherEnd="mnj.mfg.model.entities.MnjFabinsRollTransHistFkAssoc.MnjMfgFabinsProdLEO"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="MnjSkewMovementEO"
+    Association="mnj.mfg.model.entities.MnjSkewMovementFkAssoc"
+    AssociationEnd="mnj.mfg.model.entities.MnjSkewMovementFkAssoc.MnjSkewMovementEO"
+    AssociationOtherEnd="mnj.mfg.model.entities.MnjSkewMovementFkAssoc.MnjMfgFabinsProdLEO"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="MnjMfgFabinsProdLPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MNJ_MFG_FABINS_PROD_L_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.MnjMfgFabinsProdLEO.ProdLId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MnjMfgFabinsProdLFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MNJ_MFG_FABRIC_INS_TEST_H_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MNJ_MFG_FABINS_PROD_L_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.MnjMfgFabinsProdLEO.HeaderId"/>
+    </AttrArray>
+  </Key>
+</Entity>

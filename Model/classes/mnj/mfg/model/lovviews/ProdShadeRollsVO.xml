@@ -40,7 +40,8 @@
            WHERE sld.roll_no = mnjmfgfabricinstestl.roll_no
              AND sld.line_id = ld.line_id
              AND ld.prod_l_id = ll.prod_l_id
-             AND l.style = ll.style
+               AND l.SYSTEM_ID = ll.SYSTEM_ID
+            -- AND l.style = ll.style
              AND L.HEADER_ID = ll.HEADER_ID)]]>
   </SQLQuery>
   <ViewAttribute

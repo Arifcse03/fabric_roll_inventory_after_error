@@ -38,7 +38,6 @@
                                   required="#{bindings.UnitName.hints.mandatory}"
                                   shortDesc="#{bindings.UnitName.hints.tooltip}"
                                   id="soc1"
-                                  readOnly="#{bindings.UnitName.inputValue eq null ? 'false' : 'true'}"
                                   autoSubmit="true">
                 <f:selectItems value="#{bindings.UnitName.items}" id="si1"/>
               </af:selectOneChoice>

@@ -505,7 +505,8 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         String color = null;
 
         try {
-            color = vo.getCurrentRow().getAttribute("Color").toString();
+           color = vo.getCurrentRow().getAttribute("Color").toString(); 
+           // color = vo.getCurrentRow().getAttribute("Color").toString();
         } catch (Exception e) {
             e.printStackTrace();
         }

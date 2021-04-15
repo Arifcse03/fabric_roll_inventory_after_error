@@ -20,19 +20,20 @@
     </SchemaBasedProperties>
   </Properties>
   <SQLQuery>
-    <![CDATA[SELECT MnjMfgFabricInsTestL.ROLL_NO,
+    <![CDATA[SELECT distinct  MnjMfgFabricInsTestL.ROLL_NO,
 MnjMfgFabricInsTestL.SUPP_ROLL_NO,
 MnjMfgFabricInsTestL.CUT_WIDTH,
 MnjMfgFabricInsTestL.ROLL_LENGTH,
 MnjMfgFabricInsTestL.SHRINK_LENGTH,
 MnjMfgFabricInsTestL.SHRINK_WIDTH,
-S.COLOR,
+s.COLOR,
 P.STYLE,
 l.HEADER_ID,
 P.SEASON,
 MnjMfgFabricInsTestL.SHRINK_PRC_LENGTH,
 MnjMfgFabricInsTestL.SHRINK_PRC_WIDTH,
-MNJMFGFABRICINSTESTL.prod_l_id
+MNJMFGFABRICINSTESTL.prod_l_id,
+l.SYSTEM_ID
 FROM MNJ_MFG_FABRIC_INS_TEST_L MnjMfgFabricInsTestL,
 MNJ_MFG_FABINS_PROD_L l , xx_om_poc_H_t P , xx_om_poc_l_t S
 WHERE MnjMfgFabricInsTestL.LINE_TYPE = 'P'
@@ -233,6 +234,20 @@ and SS.poc_id=PP.poc_id
     ColumnType="NUMBER"
     AliasName="PROD_L_ID"
     Expression="PROD_L_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SystemId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="SYSTEM_ID"
+    Expression="SYSTEM_ID"
     SQLType="NUMERIC">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="39"/>

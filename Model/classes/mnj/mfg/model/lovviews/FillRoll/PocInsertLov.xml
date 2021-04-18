@@ -19,15 +19,10 @@
         ResId="mnj.mfg.model.lovviews.FillRoll.PocInsertLov_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
-  <Variable
-    Name="org_id"
-    Kind="where"
-    Type="java.lang.String">
-    <TransientExpression><![CDATA[adf.context.sessionScope.orgId]]></TransientExpression>
-  </Variable>
   <SQLQuery>
     <![CDATA[SELECT DISTINCT H.LC_UNIT,H.POC_ID, H.BUYER_ID,ac.CUSTOMER_NAME BUYER_NAME, H.SEASON,H.STYLE 
-FROM  AR_CUSTOMERS ac,XX_OM_POC_H_T H ,XX_OM_POC_L_T  l, MNJ_MFG_FABRIC_INS_TEST_H MnjMfgFabricInsTestH where ac.CUSTOMER_ID = H.BUYER_ID and H.LC_UNIT=:org_id]]>
+FROM  AR_CUSTOMERS ac,XX_OM_POC_H_T H ,XX_OM_POC_L_T  l  /*, MNJ_MFG_FABRIC_INS_TEST_H MnjMfgFabricInsTestH*/
+ where ac.CUSTOMER_ID = H.BUYER_ID /*and H.LC_UNIT=:org_id*/]]>
   </SQLQuery>
   <ViewAttribute
     Name="LcUnit"
